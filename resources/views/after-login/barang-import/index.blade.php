@@ -5,29 +5,26 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Basic</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">Barang Import Masuk</h4>
+                        <a href="{{ route('barang-import.masuk.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <x-table>
                         @slot('tableHead')
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>c</th>
                             </tr>
                         @endslot
 
                         @slot('tableBody')
                             <tr>
-                                <td>Name</td>
-                                <td>Position</td>
-                                <td>Office</td>
-                                <td>Age</td>
-                                <td>Start date</td>
-                                <td>Salary</td>
+                                <td>A</td>
+                                <td>B</td>
+                                <td>C</td>
                             </tr>
                         @endslot
                     </x-table>

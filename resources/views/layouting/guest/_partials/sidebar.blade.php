@@ -46,20 +46,10 @@
                     <h4 class="text-section">Karyawan Import</h4>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#forms">
+                    <a href="{{ route('pelabuhan') }}">
                         <i class="fas fa-pen-square"></i>
                         <p>Barang Masuk</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="forms">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="forms/forms.html">
-                                    <span class="sub-item">Barang Masuk</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
@@ -76,7 +66,7 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="components/avatars.html">
+                                <a href="{{ route('barang-import.masuk') }}">
                                     <span class="sub-item">Barang Masuk</span>
                                 </a>
                             </li>
