@@ -86,6 +86,7 @@
     </div>
 
     @include('layouting.guest._partials.scripts')
+    
 </body>
 
 </html>
