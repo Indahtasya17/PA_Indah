@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarangModel;
+use App\Models\TransaksiBarangModel;
 use Illuminate\Http\Request;
 use App\Models\PelabuhanModel;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ class PelabuhanController extends Controller
 
     public function index()
     {
-        $pelabuhan = PelabuhanModel::all();
+        $pelabuhan = TransaksiBarangModel::all();
         return view('after-login.pelabuhan.index', compact('pelabuhan'));
     }
     public function create()
@@ -20,16 +21,17 @@ class PelabuhanController extends Controller
         $barangs = BarangModel::all();
         return view('after-login.pelabuhan.create', compact('barangs'));
     }
+
     public function edit($id)
     {
-        $pelabuhan = PelabuhanModel::findOrFail($id);
+        $barang = TransaksiBarangModel::findOrFail($id);
         $barangs = BarangModel::all();
-        return view('after-login.pelabuhan.edit', compact('pelabuhan', 'barangs'));
+        return view('after-login.pelabuhan.edit', compact( 'barangs'));
     }
     public function detail($id)
     {
-        $pelabuhan = PelabuhanModel::findOrFail($id);
-        return view('after-login.pelabuhan.detail', compact('pelabuhan'));
+        $barang = TransaksiBarangModel::findOrFail($id);
+        return view('after-login.pelabuhan.detail', compact('barang'));
     }
 
     public function store(Request $request)
@@ -37,24 +39,30 @@ class PelabuhanController extends Controller
         $request->validate([
             'id_barang' => 'required',
             'tanggal' => 'required',
-            'no_polisi' => 'required',
             'jumlah_barang' => 'required',
-            'jumlah_container' => 'required',
+            'satuan' => 'required',
+            'no_invoice' => 'required',
             'no_container' => 'required',
+            'no_polisi' => 'required',
             'kontak' => 'required',
-            'file' => 'required',
+            'harga_beli' => 'required',
+            'file' => 'file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
+            'id_user' => 'required'
         ]);
         $file = $request->file('file');
         $namaFile = time() . '_' . $file->getClientOriginalName();
-        $pelabuhan = PelabuhanModel::create([
+        $pelabuhan = TransaksiBarangModel::create([
             'id_barang' => $request->id_barang,
             'tanggal' => $request->tanggal,
-            'no_polisi' => $request->no_polisi,
             'jumlah_barang' => $request->jumlah_barang,
-            'jumlah_container' => $request->jumlah_container,
+            'satuan' => $request->satuan,
+            'no_invoice' => $request->no_invoice,
             'no_container' => $request->no_container,
+            'no_polisi' => $request->no_polisi,
             'kontak' => $request->kontak,
-            'file' => $namaFile
+            'harga_beli' => $request->harga_beli,
+            'file' => $namaFile,
+            'id_user' => $request->id_user
         ]);
 
         if ($pelabuhan) {
@@ -69,30 +77,38 @@ class PelabuhanController extends Controller
         $request->validate([
             'id_barang' => 'required',
             'tanggal' => 'required',
-            'no_polisi' => 'required',
             'jumlah_barang' => 'required',
-            'jumlah_container' => 'required',
+            'satuan' => 'required',
+            'no_invoice' => 'required',
             'no_container' => 'required',
+            'no_polisi' => 'required',
             'kontak' => 'required',
-            'file' => 'sometimes',
+            'harga_beli' => 'required',
+            'file' => 'required',
         ], [
             'id_barang.required' => 'Barang harus di isi',
             'tanggal.required' => 'Tanggal harus di isi',
-            'no_polisi.required' => 'No polisi harus di isi',
             'jumlah_barang.required' => 'Jumlah barang harus di isi',
-            'jumlah_container.required' => 'Jumlah container harus di isi',
+            'satuan.required' => 'Satuan harus di isi',
+            'no_invoice.required' => 'No invoice harus di isi',
             'no_container.required' => 'No container harus di isi',
+            'no_polisi.required' => 'No polisi harus di isi',
             'kontak.required' => 'Kontak harus di isi',
+            'harga_beli.required' => 'Harga beli harus di isi',
+            'file.required'=> '',
         ]);
 
-        $pelabuhan = PelabuhanModel::findOrFail($id);
+        $pelabuhan = TransaksiBarangModel::findOrFail($id);
         $pelabuhan->id_barang = $request->id_barang;
         $pelabuhan->tanggal = $request->tanggal;
-        $pelabuhan->no_polisi = $request->no_polisi;
         $pelabuhan->jumlah_barang = $request->jumlah_barang;
-        $pelabuhan->jumlah_container = $request->jumlah_container;
+        $pelabuhan->satuan = $request->satuan;
+        $pelabuhan->no_invoice = $request->no_invoice;
         $pelabuhan->no_container = $request->no_container;
+        $pelabuhan->no_polisi = $request->no_polisi;
         $pelabuhan->kontak = $request->kontak;
+        $pelabuhan->harga_beli = $request->harga_beli;
+        $pelabuhan->id_user = $request->id_user;
 
         if ($request->has('file')) {
             $file = $request->file('file');
@@ -111,7 +127,7 @@ class PelabuhanController extends Controller
 
     public function destroy($id)
     {
-        $pelabuhan = PelabuhanModel::findOrFail($id);
+        $pelabuhan = TransaksiBarangModel::findOrFail($id);
         $pelabuhan->delete();
         return redirect()->route('pelabuhan')->with('success', 'Data berhasil dihapus');
     }

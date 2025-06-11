@@ -12,13 +12,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    
+
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
-                    
+
                     @if (session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
@@ -30,6 +30,7 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th>Nama Barang</th>
+                                <th>Kode Barang</th>
                                 <th>Nama Suplier</th>
                                 <th>Harga Beli</th>
                                 <th>Harga Jual</th>
@@ -45,11 +46,12 @@
                                 <tr>
                                     <th class="text-center">{{ $key + 1 }}</th>
                                     <th>{{ $item->nama_barang }}</th>
+                                    <th>{{ $item->kode_barang }}</th>
                                     <th>{{ $item->supplier->nama }}</th>
-                                    <th>{{ toIDR($item->harga_beli )}}</th>
+                                    <th>{{ toIDR($item->harga_beli) }}</th>
                                     <th>{{ toIDR($item->harga_jual) }}</th>
-                                    <th>{{ $item->minimum_stok }}</th>
                                     <th>{{ $item->stok }}</th>
+                                    <th>{{ $item->minimum_stok }}</th>
                                     <th>{{ $item->satuan }}</th>
                                     <th>
                                         <div class="d-flex gap-2 justify-content-center">

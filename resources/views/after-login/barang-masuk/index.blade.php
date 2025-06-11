@@ -6,21 +6,33 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Barang Lokal Masuk</h4>
-                        <a href="{{ route('masuk-lokal.create') }}" class="btn btn-lg btn-primary">Tambah Barang</a>
+                        <div>
+                            <h4 class="card-title">Barang Masuk</h4>
+
+                            <div>
+                                <label for="">Filter</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="all">all</option>
+                                    <option value="import">Barang Import</option>
+                                    <option value="lokal">Barang Lokal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <a href="{{ route('barang-masuk.masuk.create') }}" class="btn btn-lg btn-primary">Tambah Masuk
+                            Lokal</a>
                     </div>
                 </div>
                 <div class="card-body">
                     <x-table>
                         @slot('tableHead')
                             <tr>
-                                <th class= "text-center">No</th>
-                                <th>Nama Barang</th>
+                                <th class ="text-center">No</th>
+                                <th>Nama barang</th>
                                 <th>Tanggal</th>
-                                <th>No polisi</th>
+                                <th>Nomor Invoice</th>
+                                <th>Jenis</th>
                                 <th>Jumlah Barang</th>
-
-                                <th class="text-center">Aksi</th>
+                                <th class ="text-center">Aksi</th>
                             </tr>
                         @endslot
 
@@ -35,28 +47,36 @@
                                             @endforeach
                                         </ol>
                                     </td>
+                                    <td>{{ $item->tanggal }}</td>
                                     <td>
-                                        {{ $item->tanggal }}
+                                        {{ $item->barang_import_masuk->no_invoice ?? '-' }}
                                     </td>
-                                    <td>{{ $item->no_polisi ?? '-' }}</td>
+                                    <td>
+                                        <span
+                                            class="badge {{ $item->sumber_transaksi == 'lokal' ? 'bg-success' : 'bg-primary' }}">
+                                            {{ $item->sumber_transaksi }}
+                                        </span>
+                                    </td>
                                     <td>
                                         {{ $item->items->sum('stock') }} KG
                                         /
                                         {{ $item->items->sum('stock') / 1000 }} TON
                                     </td>
-                                    <th>
+                                    <td>
                                         <div class="d-flex gap-2 justify-content-center">
-                                            <a class="btn btn-sm btn-primary" href="{{ route('masuk-lokal.detail', $item->id) }}">
+                                            <a
+                                                class ="btn btn-sm btn-primary"href="{{ route('barang-masuk.masuk.detail', $item->id) }}">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-success" href="{{ route('masuk-lokal.edit', $item->id) }}">
+                                            <a class ="btn btn-sm btn-success"
+                                                href="{{ route('barang-masuk.masuk.edit', $item->id) }}">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger" href="">
+                                            <a class ="btn btn-sm btn-danger" href="">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
-                                    </th>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endslot

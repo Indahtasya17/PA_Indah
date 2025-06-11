@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangMasukController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\MasukLokalController;
 use App\Http\Controllers\KeluarLokalController;
 use App\Http\Controllers\BarangImportController;
 use App\Http\Controllers\KeluarImportController;
+use App\Http\Controllers\KonfirmasiController;
 
 
 Route::middleware('auth')->group(function () {
@@ -32,6 +34,18 @@ Route::middleware('auth')->group(function () {
             Route::get('{id}/edit', [BarangImportController::class, 'edit'])->name('edit');
             Route::get('{id}/detail', [BarangImportController::class, 'detail'])->name('detail');
             Route::post('store', [BarangImportController::class, 'store'])->name('store');
+            Route::put('{id}/update', [BarangImportController::class, 'update'])->name('barang.update');
+        });
+
+        Route::prefix('barang-masuk')->name('barang-masuk.')->group(function () {
+        Route::prefix('masuk')->name('masuk.')->group(function () {
+            Route::get('', [BarangMasukController::class, 'index'])->name('index');
+            Route::get('create', [BarangMasukController::class, 'create'])->name('create');
+            Route::get('{id}/edit', [BarangMasukController::class, 'edit'])->name('edit');
+            Route::get('{id}/detail', [BarangMasukController::class, 'detail'])->name('detail');
+            Route::post('store', [BarangMasukController::class, 'store'])->name('store');
+            Route::put('{id}/update', [BarangMasukController::class, 'update'])->name('barang.update');
+        });
         });
 
         Route::prefix('keluar')->name('keluar.')->group(function () {
@@ -39,6 +53,8 @@ Route::middleware('auth')->group(function () {
             Route::get('create', [KeluarImportController::class, 'create'])->name('create');
             Route::get('{id}/edit', [KeluarImportController::class, 'edit'])->name('edit');
             Route::get('{id}/detail', [KeluarImportController::class, 'detail'])->name('detail');
+            Route::post('store', [KeluarImportController::class, 'store'])->name('store');
+            Route::put('{id}/update', [KeluarImportController::class, 'update'])->name('barang.update');
         });
     });
 
@@ -47,6 +63,8 @@ Route::middleware('auth')->group(function () {
         Route::get('create', [MasukLokalController::class, 'create'])->name('masuk-lokal.create');
         Route::get('{id}/edit', [MasukLokalController::class, 'edit'])->name('masuk-lokal.edit');
         Route::get('{id}/detail', [MasukLokalController::class, 'detail'])->name('masuk-lokal.detail');
+        Route::post('store', [MasukLokalController::class, 'store'])->name('masuk-lokal.store');
+        Route::put('{id}/update', [MasukLokalController::class, 'update'])->name('masuk-lokal.update');
     });
 
     Route::prefix("keluar-lokal")->group(function () {
@@ -54,6 +72,8 @@ Route::middleware('auth')->group(function () {
         Route::get('create', [KeluarLokalController::class, 'create'])->name('keluar-lokal.create');
         Route::get('{id}/edit', [KeluarLokalController::class, 'edit'])->name('keluar-lokal.edit');
         Route::get('{id}/detail', [KeluarLokalController::class, 'detail'])->name('keluar-lokal.detail');
+        Route::post('store', [KeluarLokalController::class, 'store'])->name('keluar-lokal.store');
+        Route::put('{id}/update', [KeluarLokalController::class, 'update'])->name('keluar-lokal.update');
     });
 
     Route::prefix("sortiran")->group(function () {
@@ -61,6 +81,9 @@ Route::middleware('auth')->group(function () {
         Route::get('create', [SortiranController::class, 'create'])->name('sortiran.create');
         Route::get('{id}/edit', [SortiranController::class, 'edit'])->name('sortiran.edit');
         Route::get('{id}/detail', [SortiranController::class, 'detail'])->name('sortiran.detail');
+        Route::post('store', [SortiranController::class, 'store'])->name('sortiran.store');
+        Route::put('{id}/update', [SortiranController::class, 'update'])->name('sortiran.update');
+        Route::delete('{id}/destroy', [SortiranController::class, 'destroy'])->name('sortiran.destroy');
     });
 
     Route::prefix("barang")->group(function () {
@@ -86,6 +109,11 @@ Route::middleware('auth')->group(function () {
         Route::get('', [LaporanController::class, 'index'])->name('laporan');
         Route::get('create', [LaporanController::class, 'create'])->name('laporan.create');
         Route::get('{id}/detail', [LaporanController::class, 'detail'])->name('laporan.detail');
+    });
+
+    Route::prefix("konfirmasi")->group(function () {
+        Route::get('', [KonfirmasiController::class, 'index'])->name('konfirmasi.index');
+        Route::get('{id}/detail', [KonfirmasiController::class, 'konfirmasi'])->name('konfirmasi.detail');
     });
 
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
