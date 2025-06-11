@@ -1,5 +1,5 @@
 @extends('layouting.guest.master')
 
-@section('title', 'beraanda')
+@section('title', 'beranda')
 
 @section('content')

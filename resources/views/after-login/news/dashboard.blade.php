@@ -15,6 +15,7 @@
                 <a href="#" class="btn btn-primary btn-round">Add News</a>
             </div>
         </div>
+        
         <!-- Tambahkan konten berita di sini -->
     </div>
 </div>
