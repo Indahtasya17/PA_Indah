@@ -10,39 +10,74 @@
                         <div class="card-title">Detail Transaksi Data Barang Masuk</div>
                     </div>
                     <div class="card-body">
+                        {{-- menampilkan validasi error --}}
+                        @if ($errors->any())
+                            <ul class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        {{-- Nama Barang --}}
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="nopol">Nomor Polisi</label>
-                                    <input type="text" class="form-control" id="nopol" placeholder="Nomor Polisi" name="nopol" />
+                                    <label for="nama_barang">Nama Barang</label>
+                                    <input type="text" class="form-control" id="nama_barang" placeholder="Nama Barang"
+                                        name="nama_barang" />
                                 </div>
                             </div>
+
+                        {{-- input tanggal --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal_masuk">Tanggal</label>
-                                    <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" name="tanggal_masuk"/>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="nomor_invoice">Nomor Invoice</label>
-                                    <input type="text" class="form-control" id="nomor_invoice"
-                                        placeholder="Nomor Invoice" name="no_invoice"/>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="no_container">Nomor Container</label>
-                                    <input type="text" class="form-control" id="no_container"
-                                        placeholder="Nomor Container" />
+                                    <label for="tanggal">Tanggal</label>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal" />
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Jumlah Barang --}}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="jumlah">Jumlah Barang</label>
+                                    <input type="number" class="form-control" id="jumlah" placeholder="Jumlah Barang"
+                                        name="jumlah" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- input nomor polisi --}}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="no_polisi">Nomor Polisi</label>
+                                    <input type="text" class="form-control" id="no_polisi" placeholder="Nomor Polisi"
+                                        name="no_polisi" />
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        {{-- Harga Beli --}}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="harga_beli">Harga Beli</label>
+                                    <input type="number" class="form-control" id="harga_beli" placeholder="Harga Beli"
+                                        name="harga_beli" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
+        {{-- detail barang --}}
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="card">
@@ -55,6 +90,7 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive">
+                        {{-- Tabel untuk menampilkan barang dari tabel modal --}}
                         <table class="table" id="ProductTable">
                             <thead>
                                 <tr>
@@ -73,6 +109,8 @@
                     </div>
                 </div>
             </div>
+
+            {{-- detail file --}}
             <div class="col-12 col-md-6">
                 <div class="card">
                     <div class="card-header">
@@ -83,6 +121,7 @@
                     <div class="card-body">
                         <div id="fileRepeater">
                             <div class="row repeater-item mb-3 gx-0">
+                                {{-- input nama file --}}
                                 <div class="col-12 col-md-4">
                                     <div class="form-group">
                                         <label for="file_name">Nama File</label>
@@ -90,12 +129,14 @@
                                             placeholder="Nama File" />
                                     </div>
                                 </div>
+                                {{-- input file --}}
                                 <div class="col-12 col-md-5">
                                     <div class="form-group">
                                         <label for="file">File</label>
                                         <input type="file" class="form-control" name="files[]" />
                                     </div>
                                 </div>
+                                {{-- Tombol tambah dan hapus file --}}
                                 <div class="col-12 col-md-3 d-flex align-items-center justify-content-center">
                                     <div class="d-flex gap-2 mt-4">
                                         <button type="button" class="btn btn-sm btn-primary btn-add">
@@ -113,6 +154,7 @@
             </div>
         </div>
 
+        {{-- Tombol Aksi --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -148,9 +190,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="jumlah">Jumlah Berat</label>
+                                    <label for="jumlah">Jumlah Barang</label>
                                     <input type="number" class="form-control" id="jumlah"
-                                        placeholder="Jumlah Berat" value="1"/>
+                                        placeholder="Jumlah Barang" value="1" />
                                 </div>
                             </div>
                             <div class="col-12">
@@ -165,8 +207,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
-                                    <input type="number" class="form-control" id="harga"
-                                        placeholder="Harga Barang" value="1"/>
+                                    <input type="number" class="form-control" id="harga" placeholder="Harga Barang"
+                                        value="1" />
                                 </div>
                             </div>
                         </div>

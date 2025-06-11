@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sortirs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_barang');
-            $table->string('nama_barang');
             $table->date('tanggal');
             $table->double('jumlah_sortiran');
             $table->string('satuan');

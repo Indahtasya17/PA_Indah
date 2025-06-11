@@ -17,18 +17,16 @@ class BarangController extends Controller
         return view("after-login.barang.index", compact('barangs'));
     }
 
-
     public function getById($id)
     {
         $barang = BarangModel::find($id);
         return $barang;
-    }   
+    }
 
     public function create()
     {
         $suppliers = SupplierModel::all();
-        return view("after-login.barang.create",compact('suppliers'));
-
+        return view("after-login.barang.create", compact('suppliers'));
     }
     public function edit($id)
     {
@@ -40,14 +38,17 @@ class BarangController extends Controller
     {
         $request->validate([
             'nama_barang' => 'required',
+            'kode_barang' => 'required',
             'id_supplier' => 'required',
             'harga_jual' => 'required',
             'harga_beli' => 'required',
             'stok' => 'required',
             'minimum_stok' => 'required',
             'satuan' => 'required',
+            
         ], [
             'nama_barang.required' => 'Nama harus di isi',
+            'kode_barang.required' => 'Kode barang harus di isi',
             'id_supplier.required' => 'Supplier harus di isi',
             'harga_jual.required' => 'Harga jual harus di isi',
             'harga_beli.required' => 'Harga beli harus di isi',
@@ -57,8 +58,11 @@ class BarangController extends Controller
         ]);
 
         $barang = BarangModel::findOrFail($id);
+        $harga_beli = str_replace(['Rp', '.'], '', $request->harga_beli);
+        $harga_jual = str_replace(['Rp', '.'], '', $request->harga_jual);
         $barang->update([
             'nama_barang' => $request->nama_barang,
+            'kode_barang' => $request->kode_barang,
             'id_supplier' => $request->id_supplier,
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
@@ -74,6 +78,7 @@ class BarangController extends Controller
     {
         $request->validate([
             'nama_barang' => 'required',
+            'kode_barang' => 'required',
             'id_supplier' => 'required',
             'harga_jual' => 'required',
             'harga_beli' => 'required',
@@ -83,6 +88,7 @@ class BarangController extends Controller
 
         ], [
             'nama_barang.required' => 'Nama harus di isi',
+            'kode_barang.required' => 'Kode barang harus di isi',
             'supplier_id.required' => 'Supplier harus di isi',
             'harga_jual.required' => 'Harga jual harus di isi',
             'harga_beli.required' => 'Harga beli harus di isi',
@@ -91,8 +97,12 @@ class BarangController extends Controller
             'satuan.required' => 'Satuan harus di isi',
         ]);
 
+        $harga_beli = str_replace(['Rp', '.'], '', $request->harga_beli);
+        $harga_jual = str_replace(['Rp', '.'], '', $request->harga_jual);
+        
         BarangModel::create([
             'nama_barang' => $request->nama_barang,
+            'kode_barang' => $request->kode_barang,
             'id_supplier' => $request->id_supplier,
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
