@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('file', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_transaksi_barang');
-            $table->text('file');
             $table->timestamps();
 
             $table->foreign('id_transaksi_barang')->references('id')->on('transaksi_barangs')->onDelete('cascade');

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->date('tanggal');
             $table->double('total_tagihan');
-            $table->string('no_polisi');
+            $table->string('no_polisi')->nullable();
             $table->enum('tipe_transaksi', ['masuk', 'keluar']);
             $table->enum('sumber_transaksi', ['import', 'lokal']);
+            $table->enum('status', ['Dikirim', 'Diterima','Tidak Sesuai']);
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

@@ -1,7 +1,7 @@
 @extends('layouting.guest.master')
 
 @section('content')
-    <form action="{{ route('barang-import.masuk.store') }}" method="POST">
+    <form action="{{ route('barang-masuk.masuk.store') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-12">
@@ -14,27 +14,31 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="nopol">Nomor Polisi</label>
-                                    <input type="text" class="form-control" id="nopol" placeholder="Nomor Polisi" name="nopol" />
+                                    <input type="text" class="form-control" id="no_polisi" placeholder="Nomor Polisi"
+                                        name="no_polisi" value="{{ $transaksi->no_polisi }}" />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal_masuk">Tanggal</label>
-                                    <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" name="tanggal_masuk"/>
+                                    <label for="tanggal">Tanggal</label>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                        value="{{ $transaksi->tanggal }}" />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="nomor_invoice">Nomor Invoice</label>
                                     <input type="text" class="form-control" id="nomor_invoice"
-                                        placeholder="Nomor Invoice" name="no_invoice"/>
+                                        placeholder="Nomor Invoice" name="no_invoice" name="no_invoice"
+                                        value="{{ $transaksi->barang_import_masuk->no_invoice }}" />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="no_container">Nomor Container</label>
                                     <input type="text" class="form-control" id="no_container"
-                                        placeholder="Nomor Container" />
+                                        placeholder="Nomor Container" name="no_container"
+                                        value="{{ $transaksi->barang_import_masuk->no_container }}" />
                                 </div>
                             </div>
                         </div>
@@ -149,8 +153,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah Berat</label>
-                                    <input type="number" class="form-control" id="jumlah"
-                                        placeholder="Jumlah Berat" value="1"/>
+                                    <input type="number" class="form-control" id="jumlah" placeholder="Jumlah Berat"
+                                        value="1" />
                                 </div>
                             </div>
                             <div class="col-12">
@@ -165,8 +169,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
-                                    <input type="number" class="form-control" id="harga"
-                                        placeholder="Harga Barang" value="1"/>
+                                    <input type="number" class="form-control" id="harga" placeholder="Harga Barang"
+                                        value="1" />
                                 </div>
                             </div>
                         </div>
