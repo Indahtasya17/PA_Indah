@@ -22,7 +22,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>
-                                    <select name="id_barang" id="id_barang" class="form-select" required>
+                                    <select name="id_barang" id="id_barang" class="form-control" required>
                                         @foreach ($barangs as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
                                         @endforeach
@@ -93,7 +93,6 @@
                                         placeholder="Harga Beli" required />
                                 </div>
                             </div>
-
                             <!-- Kontak -->
                             <div class="col-12">
                                 <div class="form-group">
