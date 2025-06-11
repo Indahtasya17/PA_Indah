@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->text('sales_contract');
             $table->text('invoice');
-            $table->text('packing_List');
+            $table->text('packing_list');
             $table->text('bill_of_loading');
             $table->text('phytosanitary_certificate');
             $table->text('health_certificate');

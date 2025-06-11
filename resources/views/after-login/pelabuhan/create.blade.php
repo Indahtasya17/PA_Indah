@@ -42,7 +42,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="Jumlah_Barang">Jumlah Barang</label>
-                                    <input type="text" class="form-control" id="Jumlah_Barang" name="jumlah_barang"
+                                    <input type="number" class="form-control" id="Jumlah_Barang" name="jumlah_barang"
                                         placeholder="Jumlah Barang" required />
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="harga_beli">Harga Beli </label>
-                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli"
+                                    <input type="number" class="form-control" id="harga_beli" name="harga_beli"
                                         placeholder="Harga Beli" required />
                                 </div>
                             </div>
@@ -114,65 +114,64 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <!-- File Upload -->
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Sales Contact</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="sales_contract">Sales Contact</label>
+                                    <input type="file" class="form-control" id="sales_contract" name="sales_contract">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Invoice</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[] ">
+                                    <label for="invoice">Invoice</label>
+                                    <input type="file" class="form-control" id="invoice" name="invoice">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Packing List</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="packing_list">Packing List</label>
+                                    <input type="file" class="form-control" id="packing_list" name="packing_list">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Bill Of Lading</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="bill_of_loading">Bill Of Landing</label>
+                                    <input type="file" class="form-control" id="bill_of_loading" name="bill_of_loading">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Phytosamthing</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="phytosanitary_certificate">Phytosamthing</label>
+                                    <input type="file" class="form-control" id="phytosanitary_certificate" name="phytosanitary_certificate">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Health Certificate</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="health_certificate">Health Certificate</label>
+                                    <input type="file" class="form-control" id="health_certificate" name="health_certificate">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Fumigation</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="fumigation_certificate">Fumigation</label>
+                                    <input type="file" class="form-control" id="fumigation_certificate" name="fumigation_certificate">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Certificate of Origin</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="certificate_of_origin">Certificate of Origin</label>
+                                    <input type="file" class="form-control" id="certificate_of_origin" name="certificate_of_origin">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Prior Nootice</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="prior_notice">Prior Nootice</label>
+                                    <input type="file" class="form-control" id="prior_notice" name="prior_notice">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="file_upload">Insurance</label>
-                                    <input type="file" class="form-control" id="file_upload" name="file[]">
+                                    <label for="insurance">Insurance</label>
+                                    <input type="file" class="form-control" id="insurance" name="insurance">
                                 </div>
                             </div>
                         </div>

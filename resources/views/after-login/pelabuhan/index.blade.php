@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Barang Masuk Pelabuhan</h4>
-                        <a href="{{ route('pelabuhan.create') }}" class="btn btn- btn-primary">Tambah Barang</a>
+                        <a href="{{ route('pelabuhan.create') }}" class="btn btn- btn-primary">Tambah Barang Masuk</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -22,7 +22,7 @@
                     @if (session('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div></div>
                     @endif
-                    
+
                     <x-table>
                         @slot('tableHead')
                             <tr>
@@ -40,8 +40,14 @@
                         @foreach ( $pelabuhan as $key=> $item)
                                 <tr>
                                     <th class="text-center">{{ $key + 1 }}</th>
-                                    <th>{{ $item->barang->nama_barang }}</th>
-                                    <th>{{ $item->tanggal }}</th>   
+                                    <td>
+                                        <ol>
+                                            @foreach ($item->items as $barangItem)
+                                                <li>{{ $barangItem->barang->nama_barang ?? '-' }}</li>
+                                            @endforeach
+                                        </ol>
+                                    </td>
+                                    <th>{{ $item->tanggal }}</th>
                                     <th>{{ $item->jumlah_barang }}</th>
                                     <th>{{ $item->no_invoice }}</th>
                                     <th>
