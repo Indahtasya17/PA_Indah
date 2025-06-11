@@ -3,7 +3,7 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
-                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
                     height="20" />
             </a>
             <div class="nav-toggle">
@@ -25,14 +25,7 @@
         <div class="container-fluid">
             <nav
                 class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button type="submit" class="btn btn-search pe-1">
-                            <i class="fa fa-search search-icon"></i>
-                        </button>
-                    </div>
-                    <input type="text" placeholder="Search ..." class="form-control" />
-                </div>
+                
             </nav>
 
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -49,12 +42,6 @@
                         </form>
                     </ul>
                 </li>
-                <li class="nav-item topbar-icon dropdown hidden-caret">
-                    <a class="nav-link dropdown-toggle" href="#" id="messageDropdown"
-                        role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fa fa-envelope"></i>
-                    </a>
                     <ul class="dropdown-menu messages-notif-box animated fadeIn"
                         aria-labelledby="messageDropdown">
                         <li>
@@ -183,10 +170,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item topbar-icon dropdown hidden-caret">
-                    <a class="nav-link" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fas fa-layer-group"></i>
-                    </a>
                     <div class="dropdown-menu quick-actions animated fadeIn">
                         <div class="quick-actions-header">
                             <span class="title mb-1">Quick Actions</span>
@@ -253,7 +236,7 @@
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                         aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="assets/img/profile.jpg" alt="..."
+                            <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
                                 class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
@@ -285,7 +268,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </li>
                         </div>
                     </ul>
