@@ -27,6 +27,13 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
+                                    <label for="kode_barang">Kode Barang</label>
+                                    <input type="text" class="form-control" id="kode_barang" placeholder="Kode Barang"
+                                        name="kode_barang" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
                                     <label for="id_supplier">Nama Supplier</label>
                                     <select name="id_supplier" id="id_supplier" class="form-select">
                                         @foreach ($suppliers as $supplier)
@@ -58,16 +65,17 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
+                                    <label for="minimum_stok">Min Stock</label>
+                                    <input type="number" class="form-control" id="minimum_stok" placeholder="minimum stok " name="minimum_stok">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
                                     <label for="satuan">Satuan</label>
                                     <input type="text" class="form-control" id="satuan" placeholder="Satuan"
                                         name="satuan">
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="minimum_stok">Min Stock</label>
-                                    <input type="number" class="form-control" id="minimum_stok" placeholder="minimum stok "
-                                        name="minimum_stok">
                                 </div>
                             </div>
                         </div>

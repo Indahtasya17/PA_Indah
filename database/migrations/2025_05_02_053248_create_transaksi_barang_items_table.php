@@ -18,6 +18,7 @@ return new class extends Migration
             $table->double('harga');
             $table->integer('stock');
             $table->double('subtotal');
+            $table->timestamps();
 
             $table->foreign('id_transaksi_barang')->references('id')->on('transaksi_barangs')->onDelete('cascade');
             $table->foreign('id_barang')->references('id')->on('barangs')->onDelete('cascade');

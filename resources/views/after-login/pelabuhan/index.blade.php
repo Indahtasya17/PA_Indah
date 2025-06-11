@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Barang Masuk Pelabuhan</h4>
-                        <a href="{{ route('pelabuhan.create') }}" class="btn btn- btn-primary">Tambah Barang</a>
+                        <a href="{{ route('pelabuhan.create') }}" class="btn btn- btn-primary">Tambah Barang Masuk</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -22,7 +22,7 @@
                     @if (session('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div></div>
                     @endif
-                    
+
                     <x-table>
                         @slot('tableHead')
                             <tr>
@@ -30,7 +30,8 @@
                                 <th>Nama Barang</th>
                                 <th>Tanggal</th>
                                 <th>Jumlah Barang</th>
-                                <th>Nomor Polisi</th>
+                                <th>No Invoice</th>
+                                <th>Status</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         @endslot
@@ -39,10 +40,22 @@
                         @foreach ( $pelabuhan as $key=> $item)
                                 <tr>
                                     <th class="text-center">{{ $key + 1 }}</th>
-                                    <th>{{ $item->barang->nama_barang }}</th>
-                                    <th>{{ $item->tanggal }}</th>   
+                                    <td>
+                                        <ol>
+                                            @foreach ($item->items as $barangItem)
+                                                <li>{{ $barangItem->barang->nama_barang ?? '-' }}</li>
+                                            @endforeach
+                                        </ol>
+                                    </td>
+                                    <th>{{ $item->tanggal }}</th>
                                     <th>{{ $item->jumlah_barang }}</th>
-                                    <th>{{ $item->no_polisi }}</th>
+                                    <th>{{ $item->no_invoice }}</th>
+                                    <th>
+                                        <span
+                                            class="badge {{ $item->status == 'diterima' ? 'bg-success' : ($item->status == 'dikirim' ? 'bg-primary' : 'bg-danger') }}">
+                                            {{ $item->status }}
+                                        </span>
+                                    </th>
                                     <th>
                                         <div class="d-flex gap-2 justify-content-center">
                                             <a class="btn btn-sm btn-primary" href="{{ route('pelabuhan.detail', $item->id) }}">

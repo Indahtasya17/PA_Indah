@@ -1,4 +1,3 @@
-
 @extends('layouting.guest.master')
 
 @section('content')
@@ -15,38 +14,60 @@
                     <x-table>
                         @slot('tableHead')
                             <tr>
-                                <th class="text-center">No</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
+                                <th class="text-center"> No</th>
+                                <th>Nama barang</th>
                                 <th>Tanggal</th>
                                 <th>Jumlah Barang</th>
-                                <th>Satuan</th>
+                                <th>Harga</th>
+                                <th>Subtotal</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         @endslot
 
                         @slot('tableBody')
-                        <tr>
-                            <th class="text-center">1</th>
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Tanggal</th>
-                            <th>Jumlah Barang</th>
-                            <th>Satuan</th>
-                            <th>
-                                <div class="d-flex gap-2 justify-content-center">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('keluar-lokal.detail',1) }}">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-success" href="{{ route('keluar-lokal.edit', 1) }}">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-danger" href="">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
-                            </th>
-                        </tr>
+                            @foreach ($transaksis as $key => $item)
+                                <tr>
+                                    <td class="text-center"> {{ $key + 1 }} </td>
+                                    <td>
+                                        <ol>
+                                            @foreach ($item->items as $barangItemas)
+                                                <li>{{ $barangItemas->barang->nama_barang }}</li>
+                                            @endforeach
+                                        </ol>
+                                    </td>
+                                    <td>{{ $item->tanggal }}</td>
+                                    <td>
+                                        {{ $item->items->sum('stock') }} KG
+                                        /
+                                        {{ $item->items->sum('stock') / 1000 }} TON
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            @foreach ($item->items as $barangItemas)
+                                                <li>{{ $barangItemas->harga }}</li>
+                                            @endforeach
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        {{ $item->items->sum('subtotal') }}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-2 justify-content-center">
+                                            <a class ="btn btn-sm btn-primary"
+                                                href="{{ route('barang-import.keluar.detail', $item->id) }}">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            <a class ="btn btn-sm btn-success"
+                                                href="{{ route('barang-import.keluar.edit', $item->id) }}">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a class ="btn btn-sm btn-danger" href="">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endslot
                     </x-table>
                 </div>
@@ -54,4 +75,3 @@
         </div>
     </div>
 @endsection
-

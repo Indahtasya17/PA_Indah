@@ -20,6 +20,7 @@ return new class extends Migration
             $table->double('stok');
             $table->double('minimum_stok');
             $table->string('satuan');
+            $table->string('kode_barang');
             $table->timestamps();
 
             $table->foreign('id_supplier')->references('id')->on('suppliers');

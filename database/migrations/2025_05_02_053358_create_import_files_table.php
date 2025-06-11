@@ -14,9 +14,18 @@ return new class extends Migration
         Schema::create('import_files', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_transaksi_barang');
-            $table->string('invoice');
             $table->date('tanggal');
-            $table->text('file');
+            $table->text('sales_contract');
+            $table->text('invoice');
+            $table->text('packing_list');
+            $table->text('bill_of_loading');
+            $table->text('phytosanitary_certificate');
+            $table->text('health_certificate');
+            $table->text('fumigation_certificate');
+            $table->text('certificate_of_origin');
+            $table->text('prior_notice');
+            $table->text('insurance');
+            $table->timestamps();
 
             $table->foreign('id_transaksi_barang')->references('id')->on('transaksi_barangs')->onDelete('cascade');
         });
