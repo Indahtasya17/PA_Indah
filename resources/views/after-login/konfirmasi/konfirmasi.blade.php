@@ -1,7 +1,10 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Konfirmasi')
 @section('content')
-    <form action="{{ route('barang-import.masuk.store') }}" method="POST">
+
+    <form action="{{ route('konfirmasi.store', $id) }}" method="POST">
+
         @csrf
         <div class="row">
             <div class="col-md-12">
@@ -18,27 +21,28 @@
                                 @endforeach
                             </ul>
                         @endif
-                        {{-- input nomor polisi --}}
+                        {{-- input tanggal --}}
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
-                                    <input type="date" class="form-control" id="tanggal" name="tanggal"/>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal" />
                                 </div>
                             </div>
+                            {{-- input status --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="status">Nomor Polisi</label>
+                                    <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="diterima">Diterima</option>
                                         <option value="tidak sesuai">Tidak Sesuai</option>
                                     </select>
                                 </div>
                             </div>
-                            {{-- input nomor container --}}
+                            {{-- input keterangan --}}
                             <div class="col-12" id="keterangan-container" style="display: none;">
                                 <div class="form-group">
-                                    <label for="keterangan">Nomor Container</label>
+                                    <label for="keterangan">Keterangan</label>
                                     <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@
     <title>@yield('title') | {{ env('APP_NAME') }}</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     {{-- Ini ICon --}}
-    <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" /> 
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" /> 
 
 
     <!-- Fonts and icons -->
@@ -31,6 +31,3 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />

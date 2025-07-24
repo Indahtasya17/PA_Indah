@@ -104,13 +104,12 @@
     <div class="container-fluid p-0">
         <div class="row g-0 min-vh-100">
             <!-- Left Column: Branding/Image -->
-            <div class="col-lg-7 d-none d-lg-flex left-column-bg p-5 position-relative">
+            <div class="col-lg-7 d-none d-lg-flex left-column-bg p-5 position-relative flex-column justify-content-center">
                 {{-- You can place a logo or more elaborate branding here --}}
-                <img src="https://via.placeholder.com/150/FFFFFF/000000?Text=YourLogo" alt="Company Logo" class="mb-4"
-                    style="max-width: 150px; border-radius: 0.5rem;">
-                <h1 class="display-5 fw-bold mb-3">Welcome Back!</h1>
-                <p class="lead mb-4">Log in to continue to your dashboard and manage your account.</p>
-                <p class="text-muted small">&copy; {{ date('Y') }} Your Company. All rights reserved.</p>
+                {{-- <img src="{{ asset('assets/img\Logo_holena.png') }}" alt="Company Logo" class="mb-12" --}}
+                    {{-- style="max-width: 150px; border-radius: 0.5rem;"> --}}
+                <h1 class="display-5 fw-bold mb-3">Selamat Datang Kembali</h1>
+                {{-- <p class="lead mb-4">Log in to continue to your dashboard and manage your account.</p> --}}
             </div>
 
             <!-- Right Column: Login Form -->
@@ -118,8 +117,9 @@
                 <div class="card shadow-lg w-100" style="max-width: 480px;">
                     <div class="card-body p-4 p-sm-5">
                         <div class="text-center mb-4">
-                            <h3 class="card-title fw-bold">Account Login</h3>
-                            <p class="text-muted">Please enter your credentials to proceed.</p>
+                            <img src="{{ asset('assets/img\Logo_holena.png') }}" alt="Company Logo" class="mb-12"
+                                style="max-width: 300px; border-radius: 0.5rem;">
+                            <p class="text-muted">Silahkan Masukan Username dan Password</p>
                         </div>
 
                         <form action="{{ route('login.process') }}" method="POST">
@@ -167,7 +167,7 @@
                             </div>
 
                             <div class="d-grid">
-                                <button class="btn btn-custom-login btn-lg fw-medium" type="submit">Log In</button>
+                                <button class="btn btn-custom-login btn-lg fw-medium" type="submit">Masuk</button>
                             </div>
                         </form>
                     </div>

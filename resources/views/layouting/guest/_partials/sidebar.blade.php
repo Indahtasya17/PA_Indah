@@ -25,7 +25,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item {{ isRouteActive(['Dashboard']) }}">
-                    <a href="{{ route('sortiran') }}">
+                    <a href="{{ route('dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -37,115 +37,87 @@
                     </span>
                     <h4 class="text-section">Kelola Barang</h4>
                 </li>
-                <li
-                    class="nav-item {{ isRouteActive(['pelabuhan', 'pelabuhan.create', 'pelabuhan.edit', 'pelabuhan.create']) }}">
-                    <a href="{{ route('pelabuhan') }}">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <p>Pelabuhan
-                        </p>
-                    </a>
-                </li>
-                <li
-                    class="nav-item {{ isRouteActive(['barang-import.masuk.index', 'barang-import.keluar.index', 'barang-import.masuk.create', 'barang-import.keluar.create', 'barang-import.masuk.edit', 'konfirmasi.index'], 'submenu active') }}">
-                    <a data-bs-toggle="collapse" href="#base">
-                        <i class="fas fa-cart-arrow-down"></i>
-                        <p>Transaksi</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse {{ isRouteActive(['barang-import.masuk.index', 'barang-import.keluar.index', 'barang-import.masuk.create', 'barang-import.keluar.create', 'barang-import.masuk.edit', 'konfirmasi.index'], 'show') }}"
-                        id="base">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="{{ route('konfirmasi.index') }}">
-                                    <span class="sub-item">Konfirmasi Barang</span>
-                                </a>
-                            <li>
-                                <a href="{{ route('barang-import.masuk.index') }}">
-                                    <span class="sub-item">Barang Masuk</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('barang-import.keluar.index') }}">
-                                    <span class="sub-item">Barang Keluar</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item {{ isRouteActive(['sortiran', 'sortiran.create', 'sortiran.edit']) }}">
-                    <a href="{{ route('sortiran') }}">
-                        <i class="fas fa-clipboard-list"></i>
-                        <p>Data Sortiran</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ isRouteActive(['barang', 'barang.create', 'barang.edit']) }}">
-                    <a href="{{ route('barang') }}">
-                        <i class="fas fa-file-contract"></i>
-                        <p>Data Barang</p>
-                    </a>
-                </li>
-                <!--<li class="nav-item {{ isRouteActive(['pemesanan', 'pemesanan.create', 'pemesanan.edit']) }}">
-                        <a href="{{ route('pemesanan') }}">
-                            <i class="fas fa-pen-square"></i>
-                            <p>Pemesanan</p>
+                @hasanyrole('karyawan-pelabuhan|owner')
+                    <li
+                        class="nav-item {{ isRouteActive(['pelabuhan', 'pelabuhan.create', 'pelabuhan.edit', 'pelabuhan.create']) }}">
+                        <a href="{{ route('pelabuhan') }}">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <p>Pelabuhan
+                            </p>
                         </a>
-                    </li> -->
-                <li class="nav-item {{ isRouteActive(['supplier']) }}">
-                    <a href="{{ route('supplier') }}">
-                        <i class="fas fa-folder"></i>
-                        <p>Supplier</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ isRouteActive(['laporan']) }}">
-                    <a href="{{ route('laporan') }}">
-                        <i class="fas fa-folder"></i>
-                        <p>Laporan</p>
-                    </a>
-                </li>
-                <div class="collapse" id="submenu">
-                    <ul class="nav nav-collapse">
-                        <li>
-                            <a data-bs-toggle="collapse" href="#subnav1">
-                                <span class="sub-item">Level 1</span>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="subnav1">
-                                <ul class="nav nav-collapse subnav">
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item">Level 2</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item">Level 2</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a data-bs-toggle="collapse" href="#subnav2">
-                                <span class="sub-item">Level 1</span>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="subnav2">
-                                <ul class="nav nav-collapse subnav">
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item">Level 2</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="sub-item">Level 1</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                    </li>
+                @endhasanyrole
+                @hasanyrole('karyawan-gudang|owner')
+                    <li
+                        class="nav-item {{ isRouteActive(['barang-masuk.index', 'barang-masuk.create', 'barang-keluar.index', 'barang-keluar.create', 'konfirmasi.index'], 'submenu active') }}">
+                        <a data-bs-toggle="collapse" href="#base">
+                            <i class="fas fa-cart-arrow-down"></i>
+                            <p>Transaksi</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse {{ isRouteActive(['barang-masuk.index', 'barang-masuk.create', 'barang-keluar.index', 'barang-keluar.create', 'konfirmasi.index'], 'show') }}"
+                            id="base">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="{{ route('konfirmasi.index') }}">
+                                        <span class="sub-item">Konfirmasi Barang</span>
+                                    </a>
+                                <li>
+                                    <a href="{{ route('barang-masuk.index') }}">
+                                        <span class="sub-item">Barang Masuk</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('barang-keluar.index') }}">
+                                        <span class="sub-item">Barang Keluar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item {{ isRouteActive(['sortiran', 'sortiran.create', 'sortiran.edit']) }}">
+                        <a href="{{ route('sortiran') }}">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>Data Sortiran</p>
+                        </a>
+                    </li>
+                @endhasanyrole
+
+                @hasanyrole('karyawan-pelabuhan|karyawan-gudang|owner')
+                    <li class="nav-item {{ isRouteActive(['barang', 'barang.create', 'barang.edit']) }}">
+                        <a href="{{ route('barang') }}">
+                            <i class="fas fa-file-contract"></i>
+                            <p>Data Barang</p>
+                        </a>
+                    </li>
+                @endhasanyrole
+
+                @hasanyrole('karyawan-gudang|owner')
+                    <li class="nav-item {{ isRouteActive(['supplier']) }}">
+                        <a href="{{ route('supplier') }}">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>Data Supplier</p>
+                        </a>
+                    </li>
+                @endhasanyrole()
+
+                @hasanyrole('karyawan-gudang|owner')
+                    <li class="nav-item {{ isRouteActive(['laporan']) }}">
+                        <a href="{{ route('laporan') }}">
+                            <i class="fas fa-folder"></i>
+                            <p>Laporan</p>
+                        </a>
+                    </li>
+                @endhasanyrole
+
+                @hasanyrole('owner')
+                    <li class="nav-item {{ isRouteActive(['user']) }}">
+                        <a href="{{ route('user.index') }}">
+                            <i class="fas fa-folder"></i>
+                            <p>Data Karyawan</p>
+                        </a>
+                    </li>
+                @endhasanyrole()
                 </li>
             </ul>
         </div>

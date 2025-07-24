@@ -21,5 +21,10 @@ class ImportFileModel extends Model
         'certificate_of_origin',
         'prior_notice',
         'insurance',
+        'laporan_surveyor',
+        'surat_persetujuan_pengeluaran_barang',
+        'surat_pengantar_pengeluaran_barang',
+        'pemberitahuan_impor_barang',
+        'kt_9',
     ];
 }

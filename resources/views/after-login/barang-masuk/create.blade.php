@@ -1,7 +1,8 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Tambah Barang Masuk')
 @section('content')
-    <form action="{{ route('barang-import.masuk.store') }}" method="POST">
+    <form action="{{ route('barang-masuk.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12">
@@ -19,38 +20,16 @@
                             </ul>
                         @endif
 
-                        {{-- Nama Barang --}}
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="nama_barang">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang" placeholder="Nama Barang"
-                                        name="nama_barang" />
-                                </div>
-                            </div>
-
                         {{-- input tanggal --}}
+                        <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" />
                                 </div>
                             </div>
-                        </div>
 
-                        {{-- Jumlah Barang --}}
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="jumlah">Jumlah Barang</label>
-                                    <input type="number" class="form-control" id="jumlah" placeholder="Jumlah Barang"
-                                        name="jumlah" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- input nomor polisi --}}
-                        <div class="row">
+                            {{-- input nomor polisi --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="no_polisi">Nomor Polisi</label>
@@ -58,20 +37,23 @@
                                         name="no_polisi" />
                                 </div>
                             </div>
-                            </div>
-                        </div>
 
-                        {{-- Harga Beli --}}
-                        <div class="row">
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 ">
                                 <div class="form-group">
-                                    <label for="harga_beli">Harga Beli</label>
-                                    <input type="number" class="form-control" id="harga_beli" placeholder="Harga Beli"
-                                        name="harga_beli" />
+                                    <label for="kontak">Kontak</label>
+                                    <input type="text" class="form-control" id="kontak_supir" placeholder="Kontak"
+                                        name="kontak_supir" />
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="nota">File Nota</label>
+                                    <input type="file" class="form-control" required id="file" name="file_upload"
+                                        placeholder="nota" />
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -79,13 +61,13 @@
 
         {{-- detail barang --}}
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="card-title">Detail Barang</h4>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#productModal"
-                                class="btn btn-md btn-primary">Tambah
+                                class="btn btn-md btn-primary">+ Tambah
                                 Barang</button>
                         </div>
                     </div>
@@ -98,7 +80,7 @@
                                     <th>Nama barang</th>
                                     <th>Jumlah Barang</th>
                                     <th>Satuan</th>
-                                    <th>Harga</th>
+                                    <th>Harga Beli</th>
                                     <th>Subtotal</th>
                                     <th class ="text-center">Aksi</th>
                                 </tr>
@@ -106,49 +88,6 @@
                             <tbody>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-
-            {{-- detail file --}}
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">Detail File</h4>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="fileRepeater">
-                            <div class="row repeater-item mb-3 gx-0">
-                                {{-- input nama file --}}
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="file_name">Nama File</label>
-                                        <input type="text" class="form-control" name="file_names[]"
-                                            placeholder="Nama File" />
-                                    </div>
-                                </div>
-                                {{-- input file --}}
-                                <div class="col-12 col-md-5">
-                                    <div class="form-group">
-                                        <label for="file">File</label>
-                                        <input type="file" class="form-control" name="files[]" />
-                                    </div>
-                                </div>
-                                {{-- Tombol tambah dan hapus file --}}
-                                <div class="col-12 col-md-3 d-flex align-items-center justify-content-center">
-                                    <div class="d-flex gap-2 mt-4">
-                                        <button type="button" class="btn btn-sm btn-primary btn-add">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-danger btn-remove">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -165,6 +104,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </form>
 
     <!-- Modal -->
@@ -172,7 +112,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productModalLabel">Barang</h5>
+                    <h5 class="modal-title" id="productModalLabel">Tambah Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="ProductForm">
@@ -180,10 +120,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="barang">Barang</label>
+                                    <label for="barang">Nama Barang</label>
                                     <select class="form-select" name="barang" id="barang">
+                                        <option selected disabled>--Pilih barang--</option>
                                         @foreach ($barangs as $barang)
-                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}
+                                                ({{ $barang->kode_barang }})
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -191,31 +134,32 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah Barang</label>
-                                    <input type="number" class="form-control" id="jumlah"
-                                        placeholder="Jumlah Barang" value="1" />
+                                    <input type="number" class="form-control" id="jumlah" placeholder="Jumlah Barang" />
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="satuan">Satuan</label>
                                     <select class="form-select" name="satuan" id="satuan">
+                                        <option selected disabled>Pilih Satuan</option>
                                         <option value="kg">Kg</option>
                                         <option value="ton">Ton</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="harga">Harga</label>
-                                    <input type="number" class="form-control" id="harga" placeholder="Harga Barang"
-                                        value="1" />
+                                    <label for="harga">Harga Beli</label>
+                                    <input type="number" class="form-control" id="harga"
+                                        placeholder="Harga Beli" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -271,10 +215,10 @@
                                 <input type="hidden" name="satuan[]" value="${satuan}">
                             </td>
                             <td>
-                                ${harga}
+                                ${formatToRupiah(harga)}
                                 <input type="hidden" name="harga[]" value="${harga}">
                             </td>
-                            <td>${subtotal}</td>
+                            <td>${formatToRupiah(subtotal)}</td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm delete-row">
                                     <i class="fas fa-trash"></i>
@@ -303,6 +247,7 @@
                     $(this).find('td:first').text(productIndex);
                 });
             }
+        
         })
 
         function getProductById(id, callback) {
@@ -316,6 +261,13 @@
                     console.log(xhr.responseText);
                 }
             })
+        }
+        function formatToRupiah(amount) {
+            return amount.toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0,
+            });
         }
 
         $(document).ready(function() {
@@ -338,6 +290,8 @@
                     alert("Minimal satu input harus ada.");
                 }
             });
+
+            
         });
     </script>
 @endpush

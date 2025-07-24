@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_transaksi_barang');  
             $table->unsignedBigInteger('id_barang');
             $table->double('harga');
+            $table->double('harga_modal_lama')->default(0);
             $table->integer('stock');
             $table->double('subtotal');
             $table->timestamps();

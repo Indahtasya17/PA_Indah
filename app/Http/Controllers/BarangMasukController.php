@@ -8,18 +8,29 @@ use App\Models\BarangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\TransaksiBarangModel;
-use App\Models\BarangImportMasukModel;
 use Illuminate\Support\Facades\Storage;
 use App\Models\TransaksiBarangItemModel;
 use Illuminate\Validation\ValidationException;
 
 class BarangMasukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $transaksis = TransaksiBarangModel::with(['items.barang', 'barang_masuk'])
-            ->where('tipe_transaksi', 'masuk')
-            ->get();
+        $filter = $request->filter;
+
+        $query = TransaksiBarangModel::with(['items.barang'])
+            ->where('tipe_transaksi', 'masuk')->orderBy('created_at', 'desc');
+
+        if ($filter != null) {
+
+            $filters = ['import', 'lokal'];
+
+            if (in_array($filter, $filters)) {
+                $query = $query->where('sumber_transaksi', 'like', '%' . $filter . '%');
+            }
+        }
+
+        $transaksis = $query->get();
 
         return view("after-login.barang-masuk.index", compact('transaksis'));
     }
@@ -32,33 +43,33 @@ class BarangMasukController extends Controller
 
     public function edit($id)
     {
-        $transaksi = TransaksiBarangModel::with(['items.barang', 'barang_masuk'])->findOrFail($id);
+        $transaksi = TransaksiBarangModel::with(['items.barang', 'barang_masuk', 'file'])->findOrFail($id);
         $barangs = BarangModel::all();
         return view("after-login.barang-masuk.edit", compact('barangs', 'transaksi'));
+
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view("after-login.barang-masuk.detail");
+        $transaksi = TransaksiBarangModel::with(['items.barang', 'barang_masuk', 'file', 'import_file', 'barang_import_masuk'])->findOrFail($id);
+        return view("after-login.barang-masuk.detail", compact('transaksi'));
     }
 
     public function store(Request $request)
     {
         try {
             $request->validate([
-                'files' => 'required|array|min:1',
-                'no_polisi' => 'required',
                 'tanggal' => 'required',
-                'no_invoice' => 'required',
-                'no_container' => 'required',
+                'no_polisi' => 'required',
+                'kontak_supir' => 'required',
                 'barang' => 'required|array|min:1',
+                'file_upload' => 'required|file',
             ], [
-                'files.required' => 'File harus diisi',
-                'no_polisi.required' => 'No polisi harus diisi',
                 'tanggal.required' => 'Tanggal masuk harus diisi',
-                'no_invoice.required' => 'No invoice harus diisi',
-                'no_container.required' => 'No container harus diisi',
+                'no_polisi.required' => 'Nomor Polisi harus diisi',
+                'kontak_supir.required' => 'Kontak harus diisi',
                 'barang.required' => 'Barang harus diisi',
+                'file_upload.required' => 'File harus diisi',
             ]);
 
             $total_tagihan = 0;
@@ -80,7 +91,8 @@ class BarangMasukController extends Controller
                 'id_user' => auth()->user()->id,
                 'tanggal' => $request->tanggal,
                 'total_tagihan' => $total_tagihan,
-                'no_polisi' => $request->no_polisi,
+                'no_polisi' => strtoupper($request->no_polisi),
+                'kontak_supir' => $request->kontak_supir,
                 'tipe_transaksi' => 'masuk',
                 'sumber_transaksi' => 'lokal'
             ]);
@@ -90,35 +102,43 @@ class BarangMasukController extends Controller
                 $stock = $jumlahs[$key] * $pengali;
                 $subtotal = $stock * $hargas[$key];
 
+                $updateBarang = BarangModel::findOrFail($barang);
+                $hargaLama = $updateBarang->harga_beli;
                 TransaksiBarangItemModel::create([
                     'id_transaksi_barang' => $transaksi->id,
                     'id_barang' => $barang,
                     'harga' => $hargas[$key],
+                    'harga_modal_lama' => $hargaLama,
                     'stock' => $stock,
                     'subtotal' => $subtotal
                 ]);
+
+                if ($hargaLama != $hargas[$key]) {
+                    $jumlahAkhirHargaLama = $hargaLama * $updateBarang->stok;
+                    $jumlahAkhirHargaBaru = $hargas[$key] * $stock;
+                    $jumlahStock = $updateBarang->stok + $stock;
+                    $hargaAkhir = ($jumlahAkhirHargaLama +  $jumlahAkhirHargaBaru) / $jumlahStock;
+
+                    $updateBarang->harga_beli = $hargaAkhir;
+                }
+
+                $updateBarang->stok += $stock;
+                $updateBarang->save();
             }
 
-            foreach ($request->files as $key => $item) {
-                $nama_file = str_replace(' ', '', $request->file_names[$key]);
-                $filename = time() . '-' . $nama_file . '.' . $item->getClientOriginalExtension();
-                Storage::putFileAs('barang-masuk', $item, $filename);
+            $uploadedFile = $request->file('file_upload');
+            $filename = time() . '-' . $uploadedFile->getClientOriginalName();
+            Storage::putFileAs('barang-masuk', $uploadedFile, $filename);
 
-                FileModel::create([
-                    'id_transaksi_barang' => $transaksi->id,
-                    'file' => $filename
-                ]);
-            }
-
-            BarangMasukModel::create([
+            FileModel::create([
                 'id_transaksi_barang' => $transaksi->id,
-                'no_invoice' => $request->no_invoice,
-                'no_container' => $request->no_container
+                'file' => $filename
             ]);
 
             DB::commit();
 
             return redirect()->route('barang-masuk.index')->with('success', 'Data berhasil ditambahkan');
+
         } catch (ValidationException $e) {
             DB::rollBack();
             return redirect()->back()->withErrors($e->errors())->withInput();
@@ -131,60 +151,121 @@ class BarangMasukController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $request->validate([
+                'tanggal' => 'required',
+                'no_polisi' => 'required',
+                'kontak_supir' => 'required',
+                'barang' => 'required|array|min:1',
+                'file_upload' => 'sometimes|file',
+            ], [
+                'tanggal.required' => 'Tanggal masuk harus diisi',
+                'no_polisi.required' => 'Nomor Polisi harus diisi',
+                'kontak_supir.required' => 'Kontak harus diisi',
+                'barang.required' => 'Barang harus diisi',
+            ]);
+
             DB::beginTransaction();
 
-            $request->validate([
-                'files' => 'required|array|min:1',
-                'no_polisi' => 'required',
-                'tanggal' => 'required',
-                'no_invoice' => 'required',
-                'no_container' => 'required',
-                'barang' => 'required|array|min:1',
-            ]);
+            $transaksi = TransaksiBarangModel::find($id);
 
-            $transaksi = TransaksiBarangModel::findOrFail($id);
-            $transaksi->update([
-                'no_polisi' => $request->no_polisi,
-                'tanggal' => $request->tanggal,
-            ]);
-
-            TransaksiBarangItemModel::where('id_transaksi_barang', $id)->delete();
+            $barangs = $request->barang;
+            $jumlahs = $request->jumlah;
+            $hargas = $request->harga;
+            $satuans = $request->satuan;
 
             $total_tagihan = 0;
-            foreach ($request->barang as $key => $id_barang) {
-                $jumlah = $request->jumlah[$key];
-                $harga = $request->harga[$key];
-                $satuan = $request->satuan[$key];
-                $pengali = ($satuan === 'ton') ? 1000 : 1;
-
-                $stock = $jumlah * $pengali;
-                $subtotal = $stock * $harga;
+            foreach ($barangs as $key => $barang) {
+                $pengali = ($satuans[$key] === 'ton') ? 1000 : 1;
+                $subtotal = $pengali * $hargas[$key] * $jumlahs[$key];
                 $total_tagihan += $subtotal;
+            }
 
+            // Update transaksi
+            $transaksi->update([
+                'tanggal' => $request->tanggal,
+                'total_tagihan' => $total_tagihan,
+                'no_polisi' => strtoupper($request->no_polisi),
+                'kontak_supir' => $request->kontak_supir,
+            ]);
+
+            // Simpan datanya yang akan dihapus
+            $deletedItems = TransaksiBarangItemModel::where('id_transaksi_barang', $id)->get(); 
+
+            // Hapus datanya
+            TransaksiBarangItemModel::where('id_transaksi_barang', $id)->delete(); 
+
+            // Update stock untuk mengurangkan data yang lama
+            foreach ($deletedItems as $item) {
+                $barang = BarangModel::findOrFail($item->id_barang);
+                $barang->stok -= $item->stock;
+                $barang->harga_beli = $item->harga_modal_lama;
+                $barang->save();
+            }
+
+            // Simpan data baru
+            foreach ($barangs as $key => $barang) {
+                $pengali = ($satuans[$key] === 'ton') ? 1000 : 1;
+                $stock = $jumlahs[$key] * $pengali;
+                $subtotal = $stock * $hargas[$key];
+
+                $updateBarang = BarangModel::findOrFail($barang);
+                $hargaLama = $updateBarang->harga_beli;
                 TransaksiBarangItemModel::create([
                     'id_transaksi_barang' => $transaksi->id,
-                    'id_barang' => $id_barang,
-                    'harga' => $harga,
+                    'id_barang' => $barang,
+                    'harga' => $hargas[$key],
+                    'harga_modal_lama' => $hargaLama,
                     'stock' => $stock,
-                    'subtotal' => $subtotal,
+                    'subtotal' => $subtotal
+                ]);
+
+                if ($hargaLama != $hargas[$key]) {
+                    $jumlahAkhirHargaLama = $hargaLama * $updateBarang->stok;
+                    $jumlahAkhirHargaBaru = $hargas[$key] * $stock;
+                    $jumlahStock = $updateBarang->stok + $stock;
+                    $hargaAkhir = ($jumlahAkhirHargaLama +  $jumlahAkhirHargaBaru) / $jumlahStock;
+
+                    $updateBarang->harga_beli = $hargaAkhir;
+                }
+
+                $updateBarang->stok += $stock;
+                $updateBarang->save();
+            }
+
+            // Upload file jika ada
+            if ($request->hasFile('file_upload')) {
+                $uploadedFile = $request->file('file_upload');
+                $filename = time() . '-' . $uploadedFile->getClientOriginalName();
+                Storage::putFileAs('barang-masuk', $uploadedFile, $filename);
+
+                // Hapus file lama jika perlu, lalu simpan yang baru
+                FileModel::where('id_transaksi_barang', $transaksi->id)->delete();
+
+                FileModel::create([
+                    'id_transaksi_barang' => $transaksi->id,
+                    'file' => $filename
                 ]);
             }
 
-            $transaksi->update(['total_tagihan' => $total_tagihan]);
-
-            $barang_masuk = BarangMasukModel::where('id_transaksi_barang', $id)->first();
-            $barang_masuk->update([
-                'no_invoice' => $request->no_invoice,
-                'no_container' => $request->no_container,
-            ]);
-
             DB::commit();
-
             return redirect()->route('barang-masuk.index')->with('success', 'Data berhasil diperbarui');
+
+        } catch (ValidationException $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
+            return redirect()->back()->withErrors($e->getMessage())->with('error', 'Terjadi kesalahan saat memperbarui data');
         }
+
     }
-    
+
+    public function destroy($id)
+    {
+        $barang_masuk = TransaksiBarangModel::findOrFail($id);
+        $barang_masuk->delete();
+        return redirect()->route('barang-masuk.index')->with('success', 'Data Berhasil Dihapus');
+    }
 }
+
+

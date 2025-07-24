@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_transaksi_barang');  
             $table->date('tanggal');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->string('status');
             $table->timestamps();
 

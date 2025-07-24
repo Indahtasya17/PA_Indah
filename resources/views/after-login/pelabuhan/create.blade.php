@@ -1,5 +1,6 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Tambah Pelabuhan')
 @section('content')
     <form method="POST" action="{{ route('pelabuhan.store') }}" enctype="multipart/form-data">
         @csrf
@@ -23,6 +24,7 @@
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>
                                     <select name="id_barang" id="id_barang" class="form-control" required>
+                                        <option value="">---Pilih Nama Barang--</option>
                                         @foreach ($barangs as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
                                         @endforeach
@@ -48,7 +50,7 @@
                             </div>
 
                             <!-- Satuan -->
-                            <div class="col-12 col-md-6" >
+                            <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="satuan">Satuan</label>
                                     <select class="form-select" name="satuan" id="satuan" placeholder="Pilih Satuan">
@@ -106,11 +108,12 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Tambah Dokumen</h4>
+                        <h4 class="card-title">Tambah Dokumen Import</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -134,37 +137,42 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="bill_of_loading">Bill Of Landing</label>
-                                    <input type="file" class="form-control" id="bill_of_loading" name="bill_of_loading">
+                                    <label for="bill_of_loading">Bill of Lading</label>
+                                    <input type="file" class="form-control" id="bill_of_loading"
+                                        name="bill_of_loading">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="phytosanitary_certificate">Phytosamthing</label>
-                                    <input type="file" class="form-control" id="phytosanitary_certificate" name="phytosanitary_certificate">
+                                    <label for="phytosanitary_certificate">Phytosanitary Certificate</label>
+                                    <input type="file" class="form-control" id="phytosanitary_certificate"
+                                        name="phytosanitary_certificate">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="health_certificate">Health Certificate</label>
-                                    <input type="file" class="form-control" id="health_certificate" name="health_certificate">
+                                    <input type="file" class="form-control" id="health_certificate"
+                                        name="health_certificate">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="fumigation_certificate">Fumigation</label>
-                                    <input type="file" class="form-control" id="fumigation_certificate" name="fumigation_certificate">
+                                    <input type="file" class="form-control" id="fumigation_certificate"
+                                        name="fumigation_certificate">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="certificate_of_origin">Certificate of Origin</label>
-                                    <input type="file" class="form-control" id="certificate_of_origin" name="certificate_of_origin">
+                                    <input type="file" class="form-control" id="certificate_of_origin"
+                                        name="certificate_of_origin">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="prior_notice">Prior Nootice</label>
+                                    <label for="prior_notice">Prior Notice</label>
                                     <input type="file" class="form-control" id="prior_notice" name="prior_notice">
                                 </div>
                             </div>
@@ -174,16 +182,53 @@
                                     <input type="file" class="form-control" id="insurance" name="insurance">
                                 </div>
                             </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="laporan_surveyor">Laporan Surveyor</label>
+                                    <input type="file" class="form-control" id="laporan_surveyor"
+                                        name="laporan_surveyor">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="surat_persetujuan_pengeluaran_barang">Surat Persetujuan Pengeluaran
+                                        Barang</label>
+                                    <input type="file" class="form-control" id="surat_persetujuan_pengeluaran_barang"
+                                        name="surat_persetujuan_pengeluaran_barang">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="surat_pengantar_pengeluaran_barang">Surat Pengantar Pengeluaran
+                                        Barang </label>
+                                    <input type="file" class="form-control" id="surat_pengantar_pengeluaran_barang"
+                                        name="surat_pengantar_pengeluaran_barang">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pemberitahuan_impor_barang">Pemberitahuan Impor Barang </label>
+                                    <input type="file" class="form-control" id="pemberitahuan_impor_barang"
+                                        name="pemberitahuan_impor_barang">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="kt_9">KT-9 </label>
+                                    <input type="file" class="form-control" id="kt_9" name="kt_9">
+                                </div>
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Tombol Aksi -->
-                        <div class="card-action mt-3">
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                            <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
-                        </div>
+                    <!-- Tombol Aksi -->
+                    <div class="card-action mt-3">
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </form>
 @endsection

@@ -12,7 +12,7 @@ function toIDR($number) {
 }
 
 function formatTanggalIndo($tanggal) {
-    return Carbon::parse($tanggal)->translatedFormat('d F Y H:i');
+    return Carbon::parse($tanggal)->translatedFormat('d F Y');
 }
 
 
