@@ -116,3 +116,7 @@ Route::middleware('guest')->group(function () {
 });
 
 
+Route::get('reset', function(){
+    Artisan::call('migrate:fresh --seed');
+    return redirect()->route('beranda');
+});
