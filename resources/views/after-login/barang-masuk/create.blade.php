@@ -128,7 +128,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="barang">Nama Barang</label>
-                                    <select class="form-select" name="barang" id="barang">
+                                    <select class="form-control" name="barang" id="barang">
                                         <option selected disabled>--Pilih barang--</option>
                                         @foreach ($barangs as $barang)
                                             <option value="{{ $barang->id }}">{{ $barang->nama_barang }}
@@ -148,7 +148,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="satuan">Satuan</label>
-                                    <select class="form-select" name="satuan" id="satuan">
+                                    <select class="form-control" name="satuan" id="satuan">
                                         <option selected disabled>Pilih Satuan</option>
                                         <option value="kg">Kg</option>
                                         <option value="ton">Ton</option>
