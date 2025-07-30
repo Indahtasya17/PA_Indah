@@ -44,17 +44,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="sumber">Sumber Barang</label>
-                                    <select name="sumber" id="sumber" class="form-control" required>
-                                        <option value="" disabled selected>-- Pilih Sumber --</option>
-                                        <option value="import">Barang Import</option>
-                                        <option value="lokal">Barang Lokal</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="harga_beli">Harga Beli</label>

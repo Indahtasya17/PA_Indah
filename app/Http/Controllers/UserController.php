@@ -30,10 +30,12 @@ class UserController extends Controller
             'username' => 'required|string|unique:users,username',
         ]);
 
+        $username = strtolower($request->username);
+
         $user = User::create([
             'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->username)
+            'username' => $username,
+            'password' => Hash::make($username,)
         ]);
 
         $user->assignRole('karyawan-gudang');
