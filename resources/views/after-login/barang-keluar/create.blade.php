@@ -233,6 +233,7 @@
             }
         })
 
+        // Fungsi untuk mendapatkan nama barang berdasarkan ID
         function getProductById(id, callback) {
             $.ajax({
                 url: `/barang/${id}/find`,

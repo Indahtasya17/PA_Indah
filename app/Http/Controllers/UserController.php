@@ -57,11 +57,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users,username,' . $user->id,
-            'password' => 'nullable|string|confirmed|min:6',
         ]);
 
         $user->name = $request->name;
-        $user->username = $request->username;
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);

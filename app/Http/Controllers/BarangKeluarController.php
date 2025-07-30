@@ -116,7 +116,7 @@ class BarangKeluarController extends Controller
 
                     // Tabel Barang
                     $barang = BarangModel::find($id_barang);
-                    $barang->stok -= $stock;
+                    $barang->stok -= $stock; // mengurangi stok di data barang
                     $barang->save();
                 }
             }

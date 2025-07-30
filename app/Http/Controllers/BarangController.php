@@ -13,11 +13,13 @@ class BarangController extends Controller
 {
     public function index()
     {
+        //untuk ambil tahun sekarang
         $currentYear = now()->year;
         $start = Carbon::create($currentYear - 1, 1, 1)->startOfDay();
 
         $end = Carbon::create($currentYear, 1, 1)->startOfDay();
 
+        //untuk ambil data barang
         $barangs = BarangModel::with([
             'items' => function ($query)use ($start, $end) {
                 $query->whereHas('transaksi', function ($q)use($start, $end) {
