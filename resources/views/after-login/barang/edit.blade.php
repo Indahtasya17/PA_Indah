@@ -49,19 +49,6 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="sumber">Sumber</label>
-                                    <select name="sumber" id="sumber" class="form-control">
-                                        <option value="import"
-                                            {{ old('sumber', $barang->sumber) == 'import' ? 'selected' : '' }}>Barang Import
-                                        </option>
-                                        <option value="lokal"
-                                            {{ old('sumber', $barang->sumber) == 'lokal' ? 'selected' : '' }}>Barang Lokal
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
                                     <label for="harga_beli">Harga Beli</label>
                                     <input type="number" class="form-control" id="harga_beli" name="harga_beli"
                                         value="{{ old('harga_beli', $barang->harga_beli) }}" placeholder="Harga Beli" />
