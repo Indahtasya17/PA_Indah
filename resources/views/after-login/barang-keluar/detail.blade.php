@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label>Nama Customer</label>
                                 <p class="form-control-plaintext">
-                                    {{ $transaksi->barang_keluar_customer->nama_customer ?? $transaksi->barang_keluar_customer->nama }}
+                                    {{ $transaksi->barang_keluar_customer->nama_customer ?? $transaksi->barang_keluar_customer->nama ?? '' }}
                                 </p>
                             </div>
                         </div>

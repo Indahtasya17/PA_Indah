@@ -177,8 +177,6 @@
                 var subtotal = jumlahTotalBarang * harga;
 
 
-
-
                 getProductById(barang, function(response) {
                     var namaBarang = response;
 

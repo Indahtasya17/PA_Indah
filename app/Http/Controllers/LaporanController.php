@@ -61,7 +61,7 @@ class LaporanController extends Controller
         $tanggal_awal = $request->get('tanggal_awal');
         $tanggal_akhir = $request->get('tanggal_akhir');
 
-        $transaksis = TransaksiBarangModel::query();
+        $transaksis = TransaksiBarangModel::query()->orderBy('created_at', 'desc');
 
         if ($kategori != null) {
             $transaksis->where('tipe_transaksi', $kategori);

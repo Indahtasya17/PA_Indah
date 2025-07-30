@@ -105,7 +105,7 @@ class BarangMasukController extends Controller
                 $updateBarang = BarangModel::findOrFail($barang);
                 $hargaLama = $updateBarang->harga_beli;
                 TransaksiBarangItemModel::create([
-                    'id_transaksi_barang' => $transaksi->id,
+                    'id_transaksi_barang' => $transaksi->id,   
                     'id_barang' => $barang,
                     'harga' => $hargas[$key],
                     'harga_modal_lama' => $hargaLama,

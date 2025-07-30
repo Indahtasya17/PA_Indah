@@ -88,7 +88,7 @@
                                 <th class ="text-center">No</th>
                                 <th>Nama barang</th>
                                 <th>Stok Barang</th>
-                                <th>Safety stok</th>
+                                <th>ROP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +100,7 @@
                                     <td>
                                         <span class="badge badge-{{ $item->badge_color }}">
                                             <b>
-                                                {{ $item->safety_stock }}
+                                                {{ $item->rop }}
                                             </b>
                                         </span>
                                     </td>

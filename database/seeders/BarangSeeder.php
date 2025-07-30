@@ -17,7 +17,7 @@ class BarangSeeder extends Seeder
                 'kode_barang' => 'BABO001',
                 'harga_beli' => 10000,
                 'harga_jual' => 20000,
-                'stok' => 150,
+                'stok' => 400,
                 'waktu_tunggu' => 14,
                 'sumber' => 'import'
             ],
@@ -26,7 +26,7 @@ class BarangSeeder extends Seeder
                 'kode_barang' => 'BAPU001',
                 'harga_beli' => 15000,
                 'harga_jual' => 25000,
-                'stok' => 200,
+                'stok' => 450,
                 'waktu_tunggu' => 14,
                 'sumber' => 'import'
             ],
@@ -35,7 +35,7 @@ class BarangSeeder extends Seeder
                 'kode_barang' => 'BMBI001',
                 'harga_beli' => 10000,
                 'harga_jual' => 20000,
-                'stok' => 200,
+                'stok' => 500,
                 'waktu_tunggu' => 7,
                 'sumber' => 'lokal'
             ],

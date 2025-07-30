@@ -44,7 +44,7 @@ class BarangController extends Controller
 
             $badgeColor = '';
 
-            if ($safety_stock >= $barang->stok) {
+            if ($barang->rop >= $barang->stok) {
                 $badgeColor = 'warning';
             } else {
                 $badgeColor = 'success';

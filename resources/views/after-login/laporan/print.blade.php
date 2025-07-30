@@ -69,6 +69,10 @@
             text-align: right;
         }
 
+        ol {
+            padding-left: 8px;
+        }
+
         @media print {
             a {
                 display: none;
@@ -98,6 +102,13 @@
                 <th>Nama Barang</th>
                 <th>Tanggal</th>
                 <th>Jumlah Barang</th>
+                <th>
+                    @if (request('kategori') != null)
+                        {{ request('kategori') == 'masuk' ? 'Harga Beli' : 'Harga Jual' }}
+                    @else
+                        Harga Jual/Beli
+                    @endif
+                </th>
                 <th>Kategori</th>
                 <th>Total</th>
             </tr>
@@ -120,6 +131,21 @@
                         {{ $item->items->sum('stock') / 1000 }} TON
                     </td>
                     <td>
+                        <ol>
+                            @foreach ($item->items as $barangItem)
+                                @if ($item->tipe_transaksi == 'masuk')
+                                    <li>Rp
+                                        {{ number_format($barangItem->harga ?? 0, 0, ',', '.') }}
+                                    </li>
+                                @else
+                                    <li>Rp
+                                        {{ number_format($barangItem->barang->harga_jual ?? 0, 0, ',', '.') }}
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ol>
+                    </td>
+                    <td>
                         <span class="badge {{ $item->tipe_transaksi == 'masuk' ? 'bg-success' : 'bg-primary' }}">
                             {{ $item->tipe_transaksi }}
                         </span>
@@ -128,12 +154,12 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="no-data">Data tidak ditemukan</td>
+                    <td colspan="7" class="no-data">Data tidak ditemukan</td>
                 </tr>
             @endforelse
 
             <tr>
-                <th colspan="5" class="text-end">Total</th>
+                <th colspan="6" class="text-end">Total</th>
                 <th>Rp {{ number_format($transaksis->sum('total_tagihan'), 0, ',', '.') }}</th>
             </tr>
         </tbody>

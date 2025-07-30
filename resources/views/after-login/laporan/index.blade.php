@@ -38,7 +38,7 @@
                                     <option value="">--Pilih Barang--</option>
                                     @foreach ($barangs as $barang)
                                         <option {{ request('id_barang') == $barang->id ? 'selected' : '' }}
-                                            value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                            value="{{ $barang->id }}">{{ $barang->nama_barang }} ({{ $barang->kode_barang }})</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -90,6 +90,13 @@
                                 <th>Nama Barang</th>
                                 <th>Tanggal</th>
                                 <th>Jumlah Barang</th>
+                                <th>
+                                    @if (request('kategori') != null)
+                                        {{ request('kategori') == 'masuk' ? 'Harga Beli' : 'Harga Jual' }}
+                                    @else
+                                        Harga Jual/Beli
+                                    @endif
+                                </th>
                                 <th>Kategori</th>
                                 <th>Total</th>
                             @endslot
@@ -101,7 +108,7 @@
                                         <td>
                                             <ol>
                                                 @foreach ($item->items as $barangItem)
-                                                    <li>{{ $barangItem->barang->nama_barang ?? '-' }}</li>
+                                                    <li>{{ $barangItem->barang->nama_barang ?? '-' }}  ({{$barang->kode_barang}})</li>
                                                 @endforeach
                                             </ol>
                                         </td>
@@ -111,6 +118,22 @@
                                             /
                                             {{ $item->items->sum('stock') / 1000 }} TON
                                         </td>
+                                        <td>
+                                            <ol>
+                                                @foreach ($item->items as $barangItem)
+                                                    @if ($item->tipe_transaksi == 'masuk')
+                                                        <li>Rp 
+                                                            {{ number_format($barangItem->harga ?? 0, 0, ',', '.') }}
+                                                        </li>
+                                                    @else
+                                                        <li>Rp 
+                                                            {{ number_format($barangItem->barang->harga_jual ?? 0, 0, ',', '.') }}
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ol>
+                                        </td>
+
                                         <td>
                                             <span
                                                 class="badge {{ $item->tipe_transaksi == 'masuk' ? 'bg-success' : 'bg-primary' }}">

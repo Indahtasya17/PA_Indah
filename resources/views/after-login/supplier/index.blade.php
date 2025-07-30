@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Daftar Supplier</h4>
+                        <h4 class="card-title">Data Supplier</h4>
                         @hasallroles('karyawan-gudang')
                             <a href="{{ route('supplier.create') }}" class="btn btn-primary">+ Tambah Supplier</a>
                         @endhasallroles

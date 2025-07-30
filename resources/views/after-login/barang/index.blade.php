@@ -63,7 +63,9 @@
                                     </td>
                                     </td>
                                     <td>{{ $item->safety_stock }}</td>
-                                    <td>{{ $item->rop }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ $item->badge_color }}">{{ $item->rop }}</span>
+                                    </td>
                                     <td>
                                         <div class="d-flex gap-2 justify-content-center">
                                             @hasanyrole('karyawan-gudang')

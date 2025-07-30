@@ -38,7 +38,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 ">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="no_invoice">No Invoice</label>
+                                    <input type="text" class="form-control" id="no_invoice" name="no_invoice"
+                                        placeholder="Nomor Invoice" required />
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="kontak">Kontak</label>
                                     <input type="text" class="form-control" id="kontak_supir" placeholder="Kontak"
@@ -104,7 +112,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </form>
 
     <!-- Modal -->
@@ -134,7 +141,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah Barang</label>
-                                    <input type="number" class="form-control" id="jumlah" placeholder="Jumlah Barang" />
+                                    <input type="number" class="form-control" id="jumlah"
+                                        placeholder="Jumlah Barang" />
                                 </div>
                             </div>
                             <div class="col-12">
@@ -247,7 +255,7 @@
                     $(this).find('td:first').text(productIndex);
                 });
             }
-        
+
         })
 
         function getProductById(id, callback) {
@@ -262,6 +270,7 @@
                 }
             })
         }
+
         function formatToRupiah(amount) {
             return amount.toLocaleString("id-ID", {
                 style: "currency",
@@ -291,7 +300,7 @@
                 }
             });
 
-            
+
         });
     </script>
 @endpush

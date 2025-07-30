@@ -42,7 +42,7 @@ class SupplierController extends Controller
             'alamat' => $request->alamat
         ]);
 
-        return redirect()->route('supplier')->with('success', 'Supplier berhasil ditambahkan');
+        return redirect()->route('supplier')->with('success', 'Data Supplier Berhasil Ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -64,7 +64,7 @@ class SupplierController extends Controller
             'alamat' => $request->alamat
         ]);
 
-        return redirect()->route('supplier')->with('success', 'Supplier berhasil diubah');
+        return redirect()->route('supplier')->with('success', 'Data Supplier Berhasil Diubah');
     }
 
     public function destroy($id)
@@ -78,7 +78,7 @@ class SupplierController extends Controller
                 return redirect()->back()->with('error', 'Tidak dapat menghapus supplier karena masih digunakan di tabel barang.');
             }
 
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus supplier.');
+            return redirect()->back()->with('error', 'Terjadi Kesalahan Saat Menghapus Supplier.');
         }
     }
 }
