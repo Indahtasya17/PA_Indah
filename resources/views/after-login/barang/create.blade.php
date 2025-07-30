@@ -1,5 +1,6 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Tambah Barang')
 @section('content')
     <div class = "row">
         <div class ="col-md-12 col-md-6">
@@ -22,7 +23,7 @@
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>
                                     <input type="text" class="form-control" id="nama_barang" placeholder="Nama Barang"
-                                        name="nama_barang" />
+                                        name="nama_barang" required />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -35,10 +36,22 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="id_supplier">Nama Supplier</label>
-                                    <select name="id_supplier" id="id_supplier" class="form-select">
+                                    <select name="id_supplier" id="id_supplier" class="form-control" required>
+                                        <option value="" selected>-- Pilih Supplier -- </option>
                                         @foreach ($suppliers as $supplier)
                                             <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="sumber">Sumber Barang</label>
+                                    <select name="sumber" id="sumber" class="form-control" required>
+                                        <option value="" disabled selected>-- Pilih Sumber --</option>
+                                        <option value="import">Barang Import</option>
+                                        <option value="lokal">Barang Lokal</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,27 +78,21 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="minimum_stok">Min Stock</label>
-                                    <input type="number" class="form-control" id="minimum_stok" placeholder="minimum stok " name="minimum_stok">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="satuan">Satuan</label>
-                                    <input type="text" class="form-control" id="satuan" placeholder="Satuan"
-                                        name="satuan">
-                                </div>
-                            </div>
+                                    <label for="Lama_Pengiriman">Lama Pengiriman</label>
+                                    <input type="number" class="form-control" id="waktu_tunggu"
+                                        placeholder=" Waktu Tunggu " name="waktu_tunggu">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-action">
                         <button type="submit" class="btn btn-success">Simpan</button>
-                        <button type="button" class="btn btn-danger">Batal</button>
+                        <button type="button" a href="{{ url()->previous() }}" class="btn btn-danger">Batal</button>
                     </div>
-                </form>
             </div>
         </div>
+        </form>
+    </div>
+    </div>
     </div>
 @endsection

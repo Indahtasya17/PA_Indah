@@ -18,9 +18,9 @@ return new class extends Migration
             $table->double('harga_beli');
             $table->double('harga_jual');
             $table->double('stok');
-            $table->double('minimum_stok');
-            $table->string('satuan');
-            $table->string('kode_barang');
+            $table->integer('waktu_tunggu');
+            $table->enum('sumber', ['import', 'lokal']);
+            $table->string('kode_barang')->unique();
             $table->timestamps();
 
             $table->foreign('id_supplier')->references('id')->on('suppliers');

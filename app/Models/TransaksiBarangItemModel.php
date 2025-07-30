@@ -10,12 +10,18 @@ class TransaksiBarangItemModel extends Model
 {
     protected $table = 'transaksi_barang_items';
 
-    protected $fillable = ['id_transaksi_barang', 'id_barang', 'harga', 'stock', 'subtotal'];
+    protected $fillable = ['id_transaksi_barang', 'id_barang', 'harga', 'harga_modal_lama','stock', 'subtotal'];
 
     public function barang(): BelongsTo
     {
         return $this->belongsTo(BarangModel::class, 'id_barang', 'id');
     }
 
-    
+    public function transaksi(): BelongsTo
+    {
+        return $this->belongsTo(TransaksiBarangModel::class, 'id_transaksi_barang', 'id');
+    }
+
+
+
 }

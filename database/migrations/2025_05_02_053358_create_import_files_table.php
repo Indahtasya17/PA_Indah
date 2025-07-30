@@ -25,6 +25,11 @@ return new class extends Migration
             $table->text('certificate_of_origin');
             $table->text('prior_notice');
             $table->text('insurance');
+            $table->text('laporan_surveyor');
+            $table->text('surat_persetujuan_pengeluaran_barang');
+            $table->text('surat_pengantar_pengeluaran_barang');
+            $table->text('pemberitahuan_impor_barang');
+            $table->text('kt_9');
             $table->timestamps();
 
             $table->foreign('id_transaksi_barang')->references('id')->on('transaksi_barangs')->onDelete('cascade');

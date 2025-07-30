@@ -1,5 +1,6 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Edit Supplier')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -44,7 +45,7 @@
                         </div>
                     </div>
                     <div class="card-action">
-                        <button type="submit" class="btn btn-success">Ubah</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                         <button type="button" class="btn btn-danger">Batal</button>
                     </div>
                 </form>

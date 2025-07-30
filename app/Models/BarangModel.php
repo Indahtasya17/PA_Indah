@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BarangModel extends Model
@@ -16,12 +17,17 @@ class BarangModel extends Model
         'harga_beli',
         'harga_jual',
         'stok',
-        'minimum_stok',
-        'satuan',
+        'waktu_tunggu',
+        'sumber',
     ];
 
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(SupplierModel::class, 'id_supplier', 'id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(TransaksiBarangItemModel::class, 'id_barang', 'id');
     }
 }

@@ -1,5 +1,6 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Tambah Supplier')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -7,7 +8,7 @@
                 <div class="card-header">
                     <div class="card-title">Tambah Data Supplier</div>
                 </div>
-                
+
                 <form action="{{ route('supplier.store') }}" method="POST">
                     @csrf
                     <div class="card-body">
@@ -22,19 +23,22 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" placeholder="Nama" name="nama"/>
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama"
+                                        name="nama" />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="kontak">Kontak</label>
-                                    <input type="text" class="form-control" id="kontak" placeholder="Kontak" name="kontak"/>
+                                    <input type="text" class="form-control" id="kontak" placeholder="Kontak"
+                                        name="kontak" />
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="Alamat">Alamat</label>
-                                    <textarea name="alamat" class="form-control" id="" cols="30" rows="4" placeholder="Alamat" name="alamat"></textarea>
+                                    <textarea name="alamat" class="form-control" id="" cols="30" rows="4" placeholder="Alamat"
+                                        name="alamat"></textarea>
                                 </div>
                             </div>
                         </div>

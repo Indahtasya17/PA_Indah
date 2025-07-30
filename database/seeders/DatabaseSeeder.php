@@ -14,10 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Test User',
-            'username' => 'indah',
-            'password' => Hash::make('12345678')
+        $this->call([
+            RoleAndPermissionSeeder::class,
+            UserSeeder::class,
+            SupplierSeeder::class,
+            BarangSeeder::class,
+            TransactionSeeder::class
         ]);
+        
     }
 }
