@@ -9,7 +9,7 @@ class SupplierModel extends Model
 {
     protected $table = 'suppliers';
 
-    protected $fillable = ['nama', 'alamat', 'kontak'];
+    protected $fillable = ['nama', 'alamat', 'kontak','waktu_tunggu'];
 
     public function barangs(): HasMany
     {

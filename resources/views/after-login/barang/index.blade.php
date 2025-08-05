@@ -35,7 +35,7 @@
                                 <th>Nama Suplier</th>
                                 <th>Harga Modal</th>
                                 <th>Harga Jual</th>
-                                <th>Lama Pengiriman</th>
+                                {{-- <th>Lama Pengiriman</th> --}}
                                 <th>Stok Barang</th>
                                 <th>Safety stok</th>
                                 <th>ROP</th>
@@ -55,7 +55,7 @@
                                     <td>{{ $item->supplier->nama }}</td>
                                     <td> Rp{{ number_format($item->harga_beli, 0, ',', '.') }}</td>
                                     <td> Rp{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                                    <td>{{ $item->waktu_tunggu }}</td>
+                                    {{-- <td>{{ $item->waktu_tunggu }}</td> --}}
                                     <td>
                                         {{ number_format($item->stok, 0, ',', '.') }} KG
                                         /

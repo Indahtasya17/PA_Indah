@@ -29,16 +29,19 @@ class SupplierController extends Controller
         $request->validate([
             'nama' => 'required',
             'kontak' => 'required',
+            'waktu_tunggu' => 'required',
             'alamat' => 'required',
         ], [
             'nama.required' => 'Nama harus di isi',
             'kontak.required' => 'Kontak harus di isi',
+            'waktu_tunggu.required' => 'Waktu Tunggu harus di isi',
             'alamat.required' => 'Alamat harus di isi',
         ]);
 
         SupplierModel::create([
             'nama' => $request->nama,
             'kontak' => $request->kontak,
+            'waktu_tunggu' => $request->waktu_tunggu,
             'alamat' => $request->alamat
         ]);
 
@@ -50,10 +53,12 @@ class SupplierController extends Controller
         $request->validate([
             'nama' => 'required',
             'kontak' => 'required',
+            'waktu_tunggu' => 'required',
             'alamat' => 'required',
         ], [
             'nama.required' => 'Nama harus di isi',
             'kontak.required' => 'Kontak harus di isi',
+            'waktu_tunggu.required' => 'Lama Pengiriman harus di isi',
             'alamat.required' => 'Alamat harus di isi',
         ]);
 
@@ -61,6 +66,7 @@ class SupplierController extends Controller
         $supplier->update([
             'nama' => $request->nama,
             'kontak' => $request->kontak,
+            'waktu_tunggu' => $request->waktu_tunggu,
             'alamat' => $request->alamat
         ]);
 

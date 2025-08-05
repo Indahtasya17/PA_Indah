@@ -21,31 +21,32 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="barang">Nama Barang</label>
+                                    <label for="barang">Nama Barang <span class="text-danger">*</span></label>
                                     <select class="form-select" name="id_barang" id="barang" required>
                                         <option selected disabled>--Pilih barang--</option>
                                         @foreach ($barangs as $barang)
-                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang}}
-                                                ({{ $barang->kode_barang }})
-                                            </option>
+                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}
+                                                ({{ $barang->kode_barang }})</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
-                                    <input type="date" class="form-control" id="tanggal" name="tanggal"
-                                        required />
+                                    <label for="tanggal">Tanggal <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal" required />
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="jumlah_sortiran">Jumlah Sortiran</label>
-                                    <input type="number" class="form-control" id="jumlah_sortiran"
-                                        placeholder="Jumlah Sortiran" name="jumlah_sortiran" required />
+                                    <label for="jumlah_sortiran">Jumlah Sortiran <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="jumlah_sortiran" name="jumlah_sortiran"
+                                        placeholder="Jumlah Sortiran" required />
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="satuan">Satuan</label>
@@ -55,21 +56,25 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="jumlah_busuk">Jumlah Rusak</label>
-                                    <input type="text" class="form-control" id="jumlah_busuk" placeholder="Jumlah Rusak"
-                                        name="jumlah_busuk" required />
+                                    <label for="jumlah_busuk">Jumlah Rusak <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="jumlah_busuk" name="jumlah_busuk"
+                                        placeholder="Jumlah Rusak" required />
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="jumlah_bagus">Jumlah Bagus</label>
-                                    <input type="number" class="form-control" id="jumlah_bagus" placeholder="Jumlah Bagus"
-                                        name="jumlah_bagus" readonly />
+                                    <input type="number" class="form-control" id="jumlah_bagus" name="jumlah_bagus"
+                                        placeholder="Jumlah Bagus" readonly />
                                 </div>
                             </div>
+                            
                         </div>
+
                 </div>
                 <div class="card-action">
                     <button type="submit" class="btn btn-success">Simpan</button>

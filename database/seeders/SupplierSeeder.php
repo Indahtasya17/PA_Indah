@@ -17,6 +17,13 @@ class SupplierSeeder extends Seeder
             'nama' => 'Sarah',
             'alamat' => 'India',
             'kontak' => '91-9167441944',
+            'waktu_tunggu' => '7',
+        ];
+        [
+            'nama' => 'Rahul',
+            'alamat' => 'India',
+            'kontak' => '91-9167441944',
+            'waktu_tunggu' => '14',
         ];
 
         SupplierModel::create($supplier);

@@ -20,12 +20,14 @@ class BarangKeluarController extends Controller
         $transaksis = TransaksiBarangModel::with(['items.barang', 'barang_keluar_customer'])->where('tipe_transaksi', 'keluar')->orderBy('created_at', 'desc')->get();
         return view('after-login.barang-keluar.index', compact('transaksis'));
     }
+    
     public function create()
     {
         $barangs = BarangModel::all();
         return view('after-login.barang-keluar.create', compact('barangs'));
         
     }
+
     public function edit($id)
     {
         $transaksi = TransaksiBarangModel::find($id);
@@ -42,7 +44,6 @@ class BarangKeluarController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
         try {
             $request->validate([
                 'no_polisi' => 'required',
@@ -53,7 +54,6 @@ class BarangKeluarController extends Controller
                 'no_polisi.required' => 'No polisi harus di isi',
                 'tanggal.required' => 'Tanggal keluar harus di isi',
                 'nama_customer.required' => 'Nama customer harus di isi',
-
             ]);
 
             //siapkan data untuk dimasukan kedalam transaksi
@@ -116,7 +116,7 @@ class BarangKeluarController extends Controller
 
                     // Tabel Barang
                     $barang = BarangModel::find($id_barang);
-                    $barang->stok -= $stock; // mengurangi stok di data barang
+                    $barang->stok -= $stock; // mengurangi stok di data barang    
                     $barang->save();
                 }
             }

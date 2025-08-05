@@ -1,15 +1,15 @@
 @extends('layouting.guest.master')
 
-@section('title', 'Tambah Supplier')
+@section('title', 'Tambah Mitra')
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Tambah Data Supplier</div>
+                    <div class="card-title">Tambah Data Mitra</div>
                 </div>
 
-                <form action="{{ route('supplier.store') }}" method="POST">
+                <form action="{{ route('mitra.store') }}" method="POST">
                     @csrf
                     <div class="card-body">
                         @if ($errors->any())
@@ -23,7 +23,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="nama">
-                                        Nama Supplier <span class="text-danger">*</span>
+                                        Nama Mitra <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" id="nama" placeholder="Nama"
                                         name="nama" required />
@@ -33,20 +33,10 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="kontak">
-                                        Kontak Supplier <span class="text-danger">*</span>
+                                        Kontak Mitra <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" id="kontak" placeholder="Kontak"
                                         name="kontak" required />
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="waktu_tunggu">
-                                        Lama Pengiriman <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="number" class="form-control" id="waktu_tunggu" placeholder="Waktu Tunggu"
-                                        name="waktu_tunggu" required />
                                 </div>
                             </div>
 
@@ -64,7 +54,7 @@
                     </div>
                     <div class="card-action">
                         <button type="submit" class="btn btn-success">Simpan</button>
-                        <button type="button" class="btn btn-danger">Batal</button>
+                        <a href="{{ route('mitra.index') }}" class="btn btn-danger">Batal</a>
                     </div>
                 </form>
             </div>

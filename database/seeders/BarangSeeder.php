@@ -18,7 +18,6 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 10000,
                 'harga_jual' => 20000,
                 'stok' => 400,
-                'waktu_tunggu' => 14,
                 'sumber' => 'import'
             ],
             [
@@ -27,7 +26,6 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 15000,
                 'harga_jual' => 25000,
                 'stok' => 450,
-                'waktu_tunggu' => 14,
                 'sumber' => 'import'
             ],
             [
@@ -36,7 +34,6 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 10000,
                 'harga_jual' => 20000,
                 'stok' => 500,
-                'waktu_tunggu' => 7,
                 'sumber' => 'lokal'
             ],
         ];

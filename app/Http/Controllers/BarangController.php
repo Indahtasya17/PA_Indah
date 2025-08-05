@@ -40,9 +40,9 @@ class BarangController extends Controller
                 $rata2Penjualan = 0;
             }
 
-            $safety_stock = round(($penjualanMaksimal - $rata2Penjualan) * $barang->waktu_tunggu);
+            $safety_stock = round(($penjualanMaksimal - $rata2Penjualan) * $barang->supplier->waktu_tunggu);
             $barang->safety_stock = $safety_stock;
-            $barang->rop = round(($barang->waktu_tunggu * $rata2Penjualan) + $safety_stock);
+            $barang->rop = round(($barang->supplier->waktu_tunggu * $rata2Penjualan) + $safety_stock);
 
             $badgeColor = '';
 
@@ -87,8 +87,8 @@ class BarangController extends Controller
             'id_supplier' => 'required',
             'harga_jual' => 'required',
             'harga_beli' => 'required',
-            'stok' => 'required',
-            'waktu_tunggu' => 'required',
+            // 'stok' => 'required',
+            
 
         ], [
             'nama_barang.required' => 'Nama harus di isi',
@@ -97,8 +97,7 @@ class BarangController extends Controller
             'id_supplier.required' => 'Supplier harus di isi',
             'harga_jual.required' => 'Harga jual harus di isi',
             'harga_beli.required' => 'Harga beli harus di isi',
-            'stock.required' => 'Stock harus di isi',
-            'waktu_tunggu.required' => 'Lead Time harus di isi',
+            // 'stock.required' => 'Stock harus di isi',
         ]);
 
         $barang = BarangModel::findOrFail($id);
@@ -110,8 +109,7 @@ class BarangController extends Controller
             'id_supplier' => $request->id_supplier,
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
-            'stok' => $request->stok, 
-            'waktu_tunggu' => $request->waktu_tunggu,
+            // 'stok' => $request->stok, 
         ]);
 
         return redirect()->route('barang')->with('success', 'Barang berhasil diubah');
@@ -125,8 +123,7 @@ class BarangController extends Controller
             'id_supplier' => 'required',
             'harga_jual' => 'required',
             'harga_beli' => 'required',
-            'stok' => 'required',
-            'waktu_tunggu' => 'required',
+            // 'stok' => 'required',
 
         ], [
             'nama_barang.required' => 'Nama harus di isi',
@@ -135,8 +132,7 @@ class BarangController extends Controller
             'supplier_id.required' => 'Supplier harus di isi',
             'harga_jual.required' => 'Harga jual harus di isi',
             'harga_beli.required' => 'Harga beli harus di isi',
-            'stok.required' => 'Stock harus di isi',
-            'waktu_tunggu.required' => 'Lead Time harus di isi',
+            // 'stok.required' => 'Stock harus di isi',
         ]);
 
         $harga_beli = str_replace(['Rp', '.'], '', $request->harga_beli);
@@ -148,8 +144,7 @@ class BarangController extends Controller
             'id_supplier' => $request->id_supplier,
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
-            'stok' => $request->stok,
-            'waktu_tunggu' => $request->waktu_tunggu,
+            // 'stok' => $request->stok,
         ]);
 
         return redirect()->route('barang')->with('success', 'Barang berhasil ditambahkan');

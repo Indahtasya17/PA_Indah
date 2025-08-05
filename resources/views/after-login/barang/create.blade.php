@@ -21,11 +21,12 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="nama_barang">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang" placeholder="Nama Barang"
-                                        name="nama_barang" required />
+                                    <x-form-label for="nama_barang" :required="true">Nama Barang</x-form-label>
+                                    <input type="text" class="form-control" id="nama_barang" name="nama_barang"
+                                        placeholder="Nama Barang" required />
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="kode_barang">Kode Barang</label>
@@ -58,20 +59,20 @@
                                         name="harga_jual">
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="stok">Stok Barang</label>
                                     <input type="number" class="form-control" id="stok" placeholder="Stok Barang"
                                         name="stok">
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6">
+                            </div> --}}
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="Lama_Pengiriman">Lama Pengiriman</label>
                                     <input type="number" class="form-control" id="waktu_tunggu"
                                         placeholder=" Waktu Tunggu " name="waktu_tunggu">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="card-action">

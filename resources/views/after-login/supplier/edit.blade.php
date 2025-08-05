@@ -35,6 +35,14 @@
                                         name="kontak" value="{{ $supplier->kontak }}" />
                                 </div>
                             </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="waktu_tunggu">Lama Pengiriman</label>
+                                    <input type="number" class="form-control" id="waktu_tunggu" name="waktu_tunggu"
+                                        value="{{ old('waktu_tunggu', $supplier->waktu_tunggu) }}"
+                                        placeholder="Waktu Tunggu" />
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="Alamat">Alamat</label>
