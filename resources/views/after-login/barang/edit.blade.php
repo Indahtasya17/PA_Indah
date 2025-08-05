@@ -61,21 +61,21 @@
                                         value="{{ old('harga_jual', $barang->harga_jual) }}" placeholder="Harga Jual" />
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="stok">Stok Barang</label>
                                     <input type="number" class="form-control" id="stok" name="stok"
                                         value="{{ old('stok', $barang->stok) }}" placeholder="Stok Barang" />
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6">
+                            </div> --}}
+                            {{-- <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="waktu_tunggu">Lama Pengiriman</label>
                                     <input type="number" class="form-control" id="waktu_tunggu" name="waktu_tunggu"
                                         value="{{ old('waktu_tunggu', $barang->waktu_tunggu) }}"
                                         placeholder="Waktu Tunggu" />
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="card-action">

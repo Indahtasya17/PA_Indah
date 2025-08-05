@@ -102,6 +102,15 @@
                 @endhasanyrole()
 
                 @hasanyrole('karyawan-gudang|owner')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('mitra.index') }}">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Data Mitra</span>
+                    </a>
+                </li>
+                @endhasanyrole()
+
+                @hasanyrole('karyawan-gudang|owner')
                     <li class="nav-item {{ isRouteActive(['laporan']) }}">
                         <a href="{{ route('laporan') }}">
                             <i class="fas fa-folder"></i>

@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
+                                    <x-form-label for="tanggal" :required="true">Tanggal</x-form-label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" />
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                             {{-- input nomor polisi --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="no_polisi">Nomor Polisi</label>
+                                    <x-form-label for="no_polisi" :required="true">Nomor Polisi Truk</x-form-label>
                                     <input type="text" class="form-control" id="no_polisi" placeholder="Nomor Polisi"
                                         name="no_polisi" />
                                 </div>
@@ -40,7 +40,7 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="no_invoice">No Invoice</label>
+                                    <x-form-label for="no_invoice" :required="true">No Invoice</x-form-label>
                                     <input type="text" class="form-control" id="no_invoice" name="no_invoice"
                                         placeholder="Nomor Invoice" required />
                                 </div>
@@ -48,7 +48,7 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="kontak">Kontak</label>
+                                    <x-form-label for="kontak_supir" :required="true">Kontak Supir</x-form-label>
                                     <input type="text" class="form-control" id="kontak_supir" placeholder="Kontak"
                                         name="kontak_supir" />
                                 </div>
@@ -56,11 +56,12 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="nota">File Nota</label>
+                                    <x-form-label for="file" :required="true">File Nota</x-form-label>
                                     <input type="file" class="form-control" required id="file" name="file_upload"
                                         placeholder="nota" />
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -127,8 +128,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="barang">Nama Barang</label>
-                                    <select class="form-control" name="barang" id="barang">
+                                    <x-form-label for="barang" :required="true">Nama Barang</x-form-label>
+                                    <select class="form-control" name="barang" id="barang" required>
                                         <option selected disabled>--Pilih barang--</option>
                                         @foreach ($barangs as $barang)
                                             <option value="{{ $barang->id }}">{{ $barang->nama_barang }}
@@ -138,17 +139,19 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="jumlah">Jumlah Barang</label>
-                                    <input type="number" class="form-control" id="jumlah"
-                                        placeholder="Jumlah Barang" />
+                                    <x-form-label for="jumlah" :required="true">Jumlah Barang</x-form-label>
+                                    <input type="number" class="form-control" id="jumlah" name="jumlah"
+                                        placeholder="Jumlah Barang" required />
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="satuan">Satuan</label>
-                                    <select class="form-control" name="satuan" id="satuan">
+                                    <x-form-label for="satuan" :required="true">Satuan</x-form-label>
+                                    <select class="form-control" name="satuan" id="satuan" required>
                                         <option selected disabled>Pilih Satuan</option>
                                         <option value="kg">Kg</option>
                                         <option value="ton">Ton</option>
@@ -158,11 +161,12 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="harga">Harga Beli</label>
-                                    <input type="number" class="form-control" id="harga"
-                                        placeholder="Harga Beli" />
+                                    <x-form-label for="harga" :required="true">Harga Beli</x-form-label>
+                                    <input type="number" class="form-control" id="harga" name="harga"
+                                        placeholder="Harga Beli" required />
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">

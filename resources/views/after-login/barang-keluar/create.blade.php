@@ -20,30 +20,33 @@
                             </ul>
                         @endif
                         <div class="row">
-                            {{-- input nomor kode cv --}}
+                            {{-- input nama customer --}}
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="Kode_cv">Nama Customer </label>
+                                    <x-form-label for="Kode_cv" :required="true">Nama Customer</x-form-label>
                                     <input type="text" class="form-control" id="Kode_cv" placeholder="Nama Customer"
-                                        name="nama_customer" />
+                                        name="nama_customer" required />
                                 </div>
                             </div>
+
                             {{-- input tanggal --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
-                                    <input type="date" class="form-control" id="tanggal" name="tanggal"
-                                        name="tanggal" />
+                                    <x-form-label for="tanggal" :required="true">Tanggal</x-form-label>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal" required />
                                 </div>
                             </div>
+
                             {{-- input nomor polisi --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="no_polisi">Nomor Polisi</label>
-                                    <input type="text" class="form-control" id="no_polisi" placeholder="Nomor Polisi"
-                                        name="no_polisi" />
+                                    <x-form-label for="no_polisi" :required="true">Nomor Polisi Truk</x-form-label>
+                                    <input type="text" class="form-control" id="no_polisi" name="no_polisi"
+                                        placeholder="Nomor Polisi" required />
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -75,7 +78,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -107,39 +110,49 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="barang">Nama Barang</label>
-                                    <select class="form-control" name="barang" id="barang">
+                                    <x-form-label for="barang" :required="true">Nama Barang</x-form-label>
+                                    <select class="form-control" name="barang" id="barang" required>
                                         <option selected disabled>--Pilih barang--</option>
                                         @foreach ($barangs as $barang)
-                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}
-                                                ({{ $barang->kode_barang }})
+                                            <option value="{{ $barang->id }}">
+                                                {{ $barang->nama_barang }} ({{ $barang->kode_barang }}) (Stock:
+                                                {{ $barang->stok }} Kg)
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="jumlah">Jumlah Barang</label>
-                                    <input type="number" class="form-control" id="jumlah" placeholder="Jumlah Barang" />
+                                    <x-form-label for="jumlah" :required="true">Jumlah Barang</x-form-label>
+                                    <input type="number" class="form-control" id="jumlah" name="jumlah"
+                                        placeholder="Jumlah Barang" required />
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="satuan">Satuan</label>
-                                    <select class="form-control" name="satuan" id="satuan">
+                                    <x-form-label for="satuan" :required="true">Satuan</x-form-label>
+                                    <select class="form-control" name="satuan" id="satuan" required>
                                         <option selected disabled>Pilih Satuan</option>
                                         <option value="kg">Kg</option>
                                         <option value="ton">Ton</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="harga">Harga Jual</label>
-                                    <input type="number" class="form-control" id="harga" placeholder="Harga Jual" />
+                                    <x-form-label for="harga" :required="true">Harga Jual</x-form-label>
+                                    <input type="number" class="form-control" id="harga" name="harga"
+                                        placeholder="Harga Jual" required />
                                 </div>
                             </div>
+
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -153,6 +166,8 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         var productIndex = 0;
 
@@ -178,7 +193,18 @@
 
 
                 getProductById(barang, function(response) {
-                    var namaBarang = response;
+                    var namaBarang = response.nama_barang;
+                    var stockBarang = response.stok;
+
+                    // Periksa stok
+                    if (stockBarang < jumlahTotalBarang) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Stok barang tidak mencukupi. Stock saat ini: ' + stockBarang + ' Kg',
+                        });
+                        return;
+                    }
 
                     // Masukkan ke dalam table
                     productIndex++;
@@ -239,7 +265,7 @@
                 url: `/barang/${id}/find`,
                 type: 'GET',
                 success: function(response) {
-                    callback(response.nama_barang)
+                    callback(response)
                 },
                 error: function(xhr) {
                     console.log(xhr.responseText);

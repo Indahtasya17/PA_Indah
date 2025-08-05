@@ -12,6 +12,7 @@ use App\Models\TransaksiBarangModel;
 use App\Models\BarangImportMasukModel;
 use Illuminate\Support\Facades\Storage;
 use App\Models\TransaksiBarangItemModel;
+use App\Models\MitraModel;
 use Log;
 
 class PelabuhanController extends Controller
@@ -23,8 +24,9 @@ class PelabuhanController extends Controller
     }
     public function create()
     {
+        $mitras = MitraModel::all();
         $barangs = BarangModel::all();
-        return view('after-login.pelabuhan.create', compact('barangs'));
+        return view('after-login.pelabuhan.create', compact('barangs', 'mitras'));
     }
 
     public function edit($id)
@@ -41,59 +43,62 @@ class PelabuhanController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'id_barang' => 'required',
-                'tanggal' => 'required',
-                'jumlah_barang' => 'required',
-                'satuan' => 'required',
-                'no_invoice' => 'required',
-                'no_container' => 'required',
-                'no_polisi' => 'required',
-                'kontak' => 'required',
-                'harga_beli' => 'required',
-                'sales_contract' => 'required',
-                'invoice' => 'required',
-                'packing_list' => 'required',
-                'bill_of_loading' => 'required',
-                'phytosanitary_certificate' => 'required',
-                'health_certificate' => 'required',
-                'fumigation_certificate' => 'required',
-                'certificate_of_origin' => 'required',
-                'prior_notice' => 'required',
-                'insurance' => 'required',
-                'laporan_surveyor' => 'required',
-                'surat_persetujuan_pengeluaran_barang' => 'required',
-                'surat_pengantar_pengeluaran_barang' => 'required',
-                'pemberitahuan_impor_barang' => 'required',
-                'kt_9'=> 'required',
-            ], [
-                'id_barang.required' => 'Barang harus di isi',
-                'tanggal.required' => 'Tanggal harus di isi',
-                'jumlah_barang.required' => 'Jumlah barang harus di isi',
-                'satuan.required' => 'Satuan harus di isi',
-                'no_invoice.required' => 'No invoice harus di isi',
-                'no_container.required' => 'No container harus di isi',
-                'no_polisi.required' => 'No polisi harus di isi',
-                'kontak.required' => 'Kontak harus di isi',
-                'harga_beli.required' => 'Harga beli harus di isi',
-                'sales_contract.required' => 'Sales contract harus di isi',
-                'invoice.required' => 'Invoice harus di isi',
-                'packing_list.required' => 'Packing list harus di isi',
-                'bill_of_loading.required' => 'Bill of loading harus di isi',
-                'phytosanitary_certificate.required' => 'Phytosanitary certificate harus di isi',
-                'health_certificate.required' => 'Health certificate harus di isi',
-                'fumigation_certificate.required' => 'Fumigation certificate harus di isi',
-                'certificate_of_origin.required' => 'Certificate of origin harus di isi',
-                'prior_notice.required' => 'Prior notice harus di isi',
-                'insurance.required' => 'Insurance harus di isi',
-                'laporan_surveyor' => 'Laporan Surveyor harus di isi',
-                'surat_persetujuan_pengeluaran_barang' => 'Surat Persetujuan Pengeluaran Barang harus di isi',
-                'surat_pengantar_pengeluaran_barang' => 'Surat Pengantar Pengeluaran Barang harus di isi',
-                'pemberitahuan_impor_barang' => 'Pemberitahuan Impor Barang harus di isi',
-                'kt_9' => 'KT-9 harus di isi',
-            ]);
+        $request->validate([
+            'id_barang' => 'required',
+            'tanggal' => 'required',
+            'jumlah_barang' => 'required',
+            'satuan' => 'required',
+            'no_invoice' => 'required|unique:barang_import_masuk,no_invoice',
+            'no_container' => 'required',
+            'no_polisi' => 'required',
+            'kontak' => 'required',
+            'harga_beli' => 'required',
+            'sales_contract' => 'required',
+            'invoice' => 'required',
+            'packing_list' => 'required',
+            'bill_of_loading' => 'required',
+            'phytosanitary_certificate' => 'required',
+            'health_certificate' => 'required',
+            'fumigation_certificate' => 'required',
+            'certificate_of_origin' => 'required',
+            'prior_notice' => 'required',
+            'insurance' => 'required',
+            'laporan_surveyor' => 'required',
+            'surat_persetujuan_pengeluaran_barang' => 'required',
+            'surat_pengantar_pengeluaran_barang' => 'required',
+            'pemberitahuan_impor_barang' => 'required',
+            'kt_9' => 'required',
+        ], [
+            'id_barang.required' => 'Barang harus di isi',
+            'tanggal.required' => 'Tanggal harus di isi',
+            'jumlah_barang.required' => 'Jumlah barang harus di isi',
+            'satuan.required' => 'Satuan harus di isi',
+            'no_invoice.required' => 'No invoice harus di isi',
+            'no_invoice.unique' => 'No invoice sudah ada',
+            'no_container.required' => 'No container harus di isi',
+            'no_polisi.required' => 'No polisi harus di isi',
+            'kontak.required' => 'Kontak harus di isi',
+            'harga_beli.required' => 'Harga beli harus di isi',
+            'sales_contract.required' => 'Sales contract harus di isi',
+            'invoice.required' => 'Invoice harus di isi',
+            'packing_list.required' => 'Packing list harus di isi',
+            'bill_of_loading.required' => 'Bill of loading harus di isi',
+            'phytosanitary_certificate.required' => 'Phytosanitary certificate harus di isi',
+            'health_certificate.required' => 'Health certificate harus di isi',
+            'fumigation_certificate.required' => 'Fumigation certificate harus di isi',
+            'certificate_of_origin.required' => 'Certificate of origin harus di isi',
+            'prior_notice.required' => 'Prior notice harus di isi',
+            'insurance.required' => 'Insurance harus di isi',
+            'laporan_surveyor' => 'Laporan Surveyor harus di isi',
+            'surat_persetujuan_pengeluaran_barang' => 'Surat Persetujuan Pengeluaran Barang harus di isi',
+            'surat_pengantar_pengeluaran_barang' => 'Surat Pengantar Pengeluaran Barang harus di isi',
+            'pemberitahuan_impor_barang' => 'Pemberitahuan Impor Barang harus di isi',
+            'kt_9' => 'KT-9 harus di isi',
+        ]);
 
+
+
+        try {
             DB::beginTransaction();
 
             $transaksiData = [

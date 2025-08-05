@@ -22,9 +22,9 @@
                             <!-- Nama Barang -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="nama_barang">Nama Barang</label>
+                                    <x-form-label for="id_barang" :required="true">Nama Barang</x-form-label>
                                     <select name="id_barang" id="id_barang" class="form-control" required>
-                                        <option value="">---Pilih Nama Barang--</option>
+                                        <option value="">---Pilih Nama Barang---</option>
                                         @foreach ($barangs as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
                                         @endforeach
@@ -35,7 +35,7 @@
                             <!-- Tanggal -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal_masuk">Tanggal</label>
+                                    <x-form-label for="tanggal_masuk" :required="true">Tanggal</x-form-label>
                                     <input type="date" class="form-control" id="tanggal_masuk" name="tanggal" required />
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                             <!-- Jumlah Barang -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="Jumlah_Barang">Jumlah Barang</label>
+                                    <x-form-label for="Jumlah_Barang" :required="true">Jumlah Barang</x-form-label>
                                     <input type="number" class="form-control" id="Jumlah_Barang" name="jumlah_barang"
                                         placeholder="Jumlah Barang" required />
                                 </div>
@@ -52,18 +52,21 @@
                             <!-- Satuan -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="satuan">Satuan</label>
-                                    <select class="form-select" name="satuan" id="satuan" placeholder="Pilih Satuan">
+                                    <x-form-label for="satuan" :required="true">Satuan</x-form-label>
+                                    <select class="form-select" name="satuan" id="satuan" placeholder="Pilih Satuan"
+                                        required>
+                                        <option value="">-- Pilih Satuan --</option>
                                         <option value="kg">Kg</option>
                                         <option value="ton">Ton</option>
                                     </select>
                                 </div>
                             </div>
 
+
                             <!-- Nomor Invoice -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="no_invoice">No Invoice</label>
+                                    <x-form-label for="no_invoice" :required="true">No Invoice</x-form-label>
                                     <input type="text" class="form-control" id="no_invoice" name="no_invoice"
                                         placeholder="Nomor Invoice" required />
                                 </div>
@@ -72,7 +75,7 @@
                             <!-- Nomor Container -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="no_container">Nomor Container</label>
+                                    <x-form-label for="no_container" :required="true">Nomor Container</x-form-label>
                                     <input type="text" class="form-control" id="no_container" name="no_container"
                                         placeholder="Nomor Container" required />
                                 </div>
@@ -81,7 +84,7 @@
                             <!-- Nomor Polisi -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="nomor_polisi">Nomor Polisi</label>
+                                    <x-form-label for="nomor_polisi" :required="true">Nomor Polisi Truk</x-form-label>
                                     <input type="text" class="form-control" id="nomor_polisi" name="no_polisi"
                                         placeholder="Nomor Polisi" required />
                                 </div>
@@ -90,15 +93,29 @@
                             <!-- Harga Beli -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="harga_beli">Harga Beli </label>
+                                    <x-form-label for="harga_beli" :required="true">Harga Beli</x-form-label>
                                     <input type="number" class="form-control" id="harga_beli" name="harga_beli"
                                         placeholder="Harga Beli" required />
                                 </div>
                             </div>
-                            <!-- Kontak -->
-                            <div class="col-12">
+
+                            <!-- Nama Mitra -->
+                            <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="kontak"> Kontak </label>
+                                    <x-form-label for="mitra" :required="true">Nama Mitra</x-form-label>
+                                    <select name="mitra" id="id_mitra" class="form-control" required>
+                                        <option value="">---Pilih Nama Mitra---</option>
+                                        @foreach ($mitras as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Kontak Supir -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <x-form-label for="kontak" :required="true">Kontak Supir</x-form-label>
                                     <input type="number" class="form-control" id="kontak" name="kontak"
                                         placeholder="Kontak" required />
                                 </div>
@@ -119,107 +136,127 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="sales_contract">Sales Contact</label>
-                                    <input type="file" class="form-control" id="sales_contract" name="sales_contract">
+                                    <x-form-label for="sales_contract" :required="true">Sales Contract</x-form-label>
+                                    <input type="file" class="form-control" id="sales_contract"
+                                        name="sales_contract" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="invoice">Invoice</label>
-                                    <input type="file" class="form-control" id="invoice" name="invoice">
+                                    <x-form-label for="invoice" :required="true">Invoice</x-form-label>
+                                    <input type="file" class="form-control" id="invoice" name="invoice" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="packing_list">Packing List</label>
-                                    <input type="file" class="form-control" id="packing_list" name="packing_list">
+                                    <x-form-label for="packing_list" :required="true">Packing List</x-form-label>
+                                    <input type="file" class="form-control" id="packing_list" name="packing_list" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="bill_of_loading">Bill of Lading</label>
+                                    <x-form-label for="bill_of_loading" :required="true">Bill of Lading</x-form-label>
                                     <input type="file" class="form-control" id="bill_of_loading"
-                                        name="bill_of_loading">
+                                        name="bill_of_loading" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="phytosanitary_certificate">Phytosanitary Certificate</label>
+                                    <x-form-label for="phytosanitary_certificate" :required="true">Phytosanitary
+                                        Certificate</x-form-label>
                                     <input type="file" class="form-control" id="phytosanitary_certificate"
-                                        name="phytosanitary_certificate">
+                                        name="phytosanitary_certificate" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="health_certificate">Health Certificate</label>
+                                    <x-form-label for="health_certificate" :required="true">Health
+                                        Certificate</x-form-label>
                                     <input type="file" class="form-control" id="health_certificate"
-                                        name="health_certificate">
+                                        name="health_certificate" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="fumigation_certificate">Fumigation</label>
+                                    <x-form-label for="fumigation_certificate" :required="true">Fumigation</x-form-label>
                                     <input type="file" class="form-control" id="fumigation_certificate"
-                                        name="fumigation_certificate">
+                                        name="fumigation_certificate" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="certificate_of_origin">Certificate of Origin</label>
+                                    <x-form-label for="certificate_of_origin" :required="true">Certificate of
+                                        Origin</x-form-label>
                                     <input type="file" class="form-control" id="certificate_of_origin"
-                                        name="certificate_of_origin">
+                                        name="certificate_of_origin" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="prior_notice">Prior Notice</label>
-                                    <input type="file" class="form-control" id="prior_notice" name="prior_notice">
+                                    <x-form-label for="prior_notice" :required="true">Prior Notice</x-form-label>
+                                    <input type="file" class="form-control" id="prior_notice" name="prior_notice" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="insurance">Insurance</label>
-                                    <input type="file" class="form-control" id="insurance" name="insurance">
+                                    <x-form-label for="insurance" :required="true">Insurance</x-form-label>
+                                    <input type="file" class="form-control" id="insurance" name="insurance" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="laporan_surveyor">Laporan Surveyor</label>
+                                    <x-form-label for="laporan_surveyor" :required="true">Laporan Surveyor</x-form-label>
                                     <input type="file" class="form-control" id="laporan_surveyor"
-                                        name="laporan_surveyor">
+                                        name="laporan_surveyor" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="surat_persetujuan_pengeluaran_barang">Surat Persetujuan Pengeluaran
-                                        Barang</label>
+                                    <x-form-label for="surat_persetujuan_pengeluaran_barang" :required="true">Surat
+                                        Persetujuan Pengeluaran Barang</x-form-label>
                                     <input type="file" class="form-control" id="surat_persetujuan_pengeluaran_barang"
-                                        name="surat_persetujuan_pengeluaran_barang">
+                                        name="surat_persetujuan_pengeluaran_barang" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="surat_pengantar_pengeluaran_barang">Surat Pengantar Pengeluaran
-                                        Barang </label>
+                                    <x-form-label for="surat_pengantar_pengeluaran_barang" :required="true">Surat
+                                        Pengantar Pengeluaran Barang</x-form-label>
                                     <input type="file" class="form-control" id="surat_pengantar_pengeluaran_barang"
-                                        name="surat_pengantar_pengeluaran_barang">
+                                        name="surat_pengantar_pengeluaran_barang" required>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="pemberitahuan_impor_barang">Pemberitahuan Impor Barang </label>
+                                    <x-form-label for="pemberitahuan_impor_barang" :required="true">Pemberitahuan Impor
+                                        Barang</x-form-label>
                                     <input type="file" class="form-control" id="pemberitahuan_impor_barang"
-                                        name="pemberitahuan_impor_barang">
+                                        name="pemberitahuan_impor_barang" required>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="kt_9">KT-9 </label>
-                                    <input type="file" class="form-control" id="kt_9" name="kt_9">
+                                    <x-form-label for="kt_9" :required="true">KT-9</x-form-label>
+                                    <input type="file" class="form-control" id="kt_9" name="kt_9" required>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Tombol Aksi -->
                     <div class="card-action mt-3">

@@ -19,10 +19,8 @@ class BarangModel extends Model
         'harga_beli',
         'harga_jual',
         'stok',
-        'waktu_tunggu',
         'sumber',
     ];
-
 
     //tabel baraang beralasi one to one dengan supplier
     public function supplier(): BelongsTo

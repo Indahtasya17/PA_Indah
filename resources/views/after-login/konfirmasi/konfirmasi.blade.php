@@ -25,24 +25,26 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
+                                    <x-form-label for="tanggal" :required="true">Tanggal</x-form-label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" />
                                 </div>
                             </div>
+
                             {{-- input status --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="status">Status</label>
+                                    <x-form-label for="status" :required="true">Status</x-form-label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="diterima">Diterima</option>
                                         <option value="tidak sesuai">Tidak Sesuai</option>
                                     </select>
                                 </div>
                             </div>
+
                             {{-- input keterangan --}}
                             <div class="col-12" id="keterangan-container" style="display: none;">
                                 <div class="form-group">
-                                    <label for="keterangan">Keterangan</label>
+                                    <x-form-label for="keterangan" :required="true">Keterangan</x-form-label>
                                     <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                 </div>
                             </div>
@@ -50,6 +52,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         {{-- Tombol Aksi --}}

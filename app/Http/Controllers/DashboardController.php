@@ -133,9 +133,9 @@ class DashboardController extends Controller
 
                 $rata2Penjualan = $totalTransaksi > 0 ? $jumlahPenjualan / $totalTransaksi : 0;
 
-                $safety_stock = round(($penjualanMaksimal - $rata2Penjualan) * $barang->waktu_tunggu);
+                $safety_stock = round(($penjualanMaksimal - $rata2Penjualan) * $barang->supplier->waktu_tunggu);
                 $barang->safety_stock = $safety_stock;
-                $barang->rop = round(($barang->waktu_tunggu * $rata2Penjualan) + $safety_stock);
+                $barang->rop = round(($barang->supplier->waktu_tunggu * $rata2Penjualan) + $safety_stock);
 
                 $badgeColor = 'success';
                 if ($barang->rop >= $barang->stok) {

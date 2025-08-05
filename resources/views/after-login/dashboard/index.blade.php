@@ -89,12 +89,14 @@
                                 <th>Nama barang</th>
                                 <th>Stok Barang</th>
                                 <th>ROP</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($barangs as $item)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}
+                                    </td>
                                     <td>{{ $item->nama_barang }}</td>
                                     <td>{{ $item->stok }}</td>
                                     <td>
@@ -103,6 +105,13 @@
                                                 {{ $item->rop }}
                                             </b>
                                         </span>
+                                    </td>
+                                    <td>
+                                        @if ($item->badge_color == 'danger' || $item->badge_color == 'warning')
+                                            Lakukan Pemesanan Ulang
+                                        @else
+                                            -
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
@@ -207,10 +216,10 @@
             options: {
                 responsive: true,
                 plugins: {
-            legend: {
-                display: false // Nonaktifkan legend
-            }
-        },
+                    legend: {
+                        display: false // Nonaktifkan legend
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,

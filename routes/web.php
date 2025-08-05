@@ -13,6 +13,7 @@ use App\Http\Controllers\PelabuhanController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\MitraController;
 
 
 
@@ -92,6 +93,15 @@ Route::middleware('auth')->group(function () {
         Route::delete('{id}/destroy', [SupplierController::class, 'destroy'])->name('supplier.destroy');
     });
 
+    Route::prefix("mitra")->group(function () {
+        Route::get('', [MitraController::class, 'index'])->name('mitra.index');
+        Route::get('create', [MitraController::class, 'create'])->name('mitra.create');
+        Route::get('{id}/edit', [MitraController::class, 'edit'])->name('mitra.edit');
+        Route::post('store', [MitraController::class, 'store'])->name('mitra.store');
+        Route::put('{id}/update', [MitraController::class, 'update'])->name('mitra.update');
+        Route::delete('{id}/destroy', [MitraController::class, 'destroy'])->name('mitra.destroy');
+    });
+
     Route::prefix('auth')->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile');
         Route::put('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
@@ -116,7 +126,7 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::get('reset', function(){
+Route::get('reset', function () {
     Artisan::call('migrate:fresh --seed');
     return redirect()->route('beranda');
 });
